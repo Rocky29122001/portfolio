@@ -94,10 +94,15 @@ nav a:hover::after {
 .hero {
   min-height: 100vh;
   padding: 160px 10% 80px;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   gap: 60px;
+}
+
+.hero-content {
+  flex: 1.2;
 }
 
 .hero-content h1 {
@@ -122,6 +127,7 @@ nav a:hover::after {
 }
 
 .hero-image {
+  flex: 1;
   display: flex;
   justify-content: center;
 }
@@ -511,7 +517,7 @@ nav a:hover::after {
 ===================== */
 @media (max-width: 1024px) {
   .hero {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     text-align: center;
     padding-top: 140px;
     gap: 40px;
@@ -528,6 +534,11 @@ nav a:hover::after {
   .section {
     padding: 80px 5%;
   }
+
+  .stats {
+    flex-wrap: wrap;
+    gap: 30px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -537,44 +548,62 @@ nav a:hover::after {
 
   .menu-btn {
     display: block;
+    z-index: 1001;
   }
 
   nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
     background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
+    border-left: 1px solid var(--border);
     flex-direction: column;
+    justify-content: center;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   nav.active {
-    display: flex;
-    animation: slideDown 0.3s ease forwards;
+    right: 0;
   }
 
   nav a {
-    margin: 15px 0;
-    font-size: 1.2rem;
+    margin: 20px 0;
+    font-size: 1.3rem;
     display: block;
   }
 
   .hero-content h1 {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .hero-image img {
-    width: 250px;
+    width: 220px;
+  }
+
+  .stats {
+    padding: 40px 5%;
+  }
+
+  .stat-box {
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
   }
 
   .contact-container {
     grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .contact-info, .contact-form {
+    padding: 25px;
   }
 
   .footer-content {
@@ -584,14 +613,26 @@ nav a:hover::after {
   }
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 28px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .hero-content h3 {
+    font-size: 18px;
+  }
+
+  .hero-image img {
+    width: 180px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    font-size: 0.9rem;
+  }
+
+  .section h2 {
+    font-size: 28px;
   }
 }
 

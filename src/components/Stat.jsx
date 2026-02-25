@@ -3,11 +3,13 @@ import { fadeUp } from "../animations";
 import { useEffect, useRef } from "react";
 
 const Counter = ({ target }) => {
-    const ref = useRef(0);
+    const ref = useRef(null);
 
     useEffect(() => {
+        if (!ref.current) return;
         let count = 0;
         const update = () => {
+            if (!ref.current) return;
             count += target / 80;
             if (count < target) {
                 ref.current.innerText = Math.ceil(count);

@@ -1,4 +1,5 @@
 import { motion as Motion } from "framer-motion";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
 
 const Contact = () => {
     return (
@@ -22,7 +23,7 @@ const Contact = () => {
                     
                     <div className="contact-item">
                         <div className="icon-box">
-                            <i className="fa-solid fa-envelope"></i>
+                            <FaEnvelope />
                         </div>
                         <div>
                             <span>Email</span>
@@ -32,7 +33,7 @@ const Contact = () => {
                     
                     <div className="contact-item">
                         <div className="icon-box">
-                            <i className="fa-solid fa-phone"></i>
+                            <FaPhone />
                         </div>
                         <div>
                             <span>Phone</span>
@@ -42,7 +43,7 @@ const Contact = () => {
                     
                     <div className="contact-item">
                         <div className="icon-box">
-                            <i className="fa-solid fa-location-dot"></i>
+                            <FaMapMarkerAlt />
                         </div>
                         <div>
                             <span>Location</span>
@@ -72,7 +73,7 @@ const Contact = () => {
                         <label htmlFor="message" className="form-label">Your Message</label>
                     </div>
                     <button type="submit" className="btn">
-                        Send Message <i className="fa-solid fa-paper-plane" style={{ marginLeft: "8px" }}></i>
+                        Send Message <FaPaperPlane style={{ marginLeft: "8px" }} />
                     </button>
                 </Motion.form>
             </div>

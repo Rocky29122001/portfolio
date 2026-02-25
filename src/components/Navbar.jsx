@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
@@ -68,7 +69,7 @@ const Navbar = () => {
             </nav>
 
             <div className="menu-btn" onClick={() => setOpen(!open)}>
-                <i className="fa-solid fa-bars"></i>
+                {open ? <FaTimes /> : <FaBars />}
             </div>
         </header>
     );

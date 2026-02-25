@@ -1,4 +1,5 @@
 import { motion as Motion } from "framer-motion";
+import { FaCode, FaDatabase, FaServer } from "react-icons/fa";
 
 const About = () => {
     return (
@@ -34,7 +35,7 @@ const About = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        <i className="fa-solid fa-code"></i>
+                        <FaCode />
                         <h3>Clean Code</h3>
                         <p>Writing maintainable, readable, and efficient code is my priority.</p>
                     </Motion.div>
@@ -45,7 +46,7 @@ const About = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
                     >
-                        <i className="fa-solid fa-database"></i>
+                        <FaDatabase />
                         <h3>Database Design</h3>
                         <p>Optimizing schemas and queries for high-performance applications.</p>
                     </Motion.div>
@@ -56,7 +57,7 @@ const About = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
                     >
-                        <i className="fa-solid fa-server"></i>
+                        <FaServer />
                         <h3>Scalable Systems</h3>
                         <p>Building backends that can handle growth and heavy loads.</p>
                     </Motion.div>

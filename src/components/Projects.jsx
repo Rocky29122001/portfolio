@@ -5,19 +5,19 @@ const projects = [
     {
         title: "Myanmar Cane Handicraft Platform",
         desc: "An e-commerce platform dedicated to promoting traditional Myanmar cane handicrafts. Features include product catalog, cart management, and admin dashboard.",
-        tags: ["Laravel", "MySQL", "Bootstrap", "jQuery"],
+        tags: ["Python", "Django", "Bootstrap", "JavaScript"],
         link: "#"
     },
     {
         title: "Bulletin Board System",
         desc: "A community forum for sharing announcements and discussions. Includes user authentication, post creation, and comment threads.",
-        tags: ["PHP", "SQL Server", "CSS"],
+        tags: ["PHP", "Laravel", "MySQL","jQuery", "CSS"],
         link: "#"
     },
     {
         title: "21 Game Android App",
         desc: "A mobile card game application based on the classic Blackjack rules. Built with Java for Android devices.",
-        tags: ["Java", "Android Studio", "SQLite"],
+        tags: ["Flutter", "Android Studio", "SQLite"],
         link: "#"
     }
 ];

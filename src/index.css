@@ -328,6 +328,34 @@ nav a:hover::after {
   box-shadow: 0 18px 40px rgba(56, 189, 248, 0.25);
 }
 
+/* Skills marquee */
+.skills-marquee {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.skills-track {
+  display: flex;
+  gap: 26px;
+  will-change: transform;
+  animation: marquee 18s linear infinite;
+}
+
+.skills-track .skill-card {
+  min-width: 160px;
+  align-items: center;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.skill-icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
 /* Project card details */
 .project-header {
   font-size: 1.25rem;

@@ -9,7 +9,8 @@ import {
     FaCss3Alt,
     FaBootstrap,
     FaDatabase,
-    FaMobileAlt
+    FaMobileAlt,
+    FaReact
 } from "react-icons/fa";
 import { TbBrandCSharp } from "react-icons/tb";
 
@@ -28,7 +29,8 @@ const Skills = () => {
         { label: "MySQL", Icon: FaDatabase, color: "#00618A" },
         { label: "SQL Server", Icon: FaDatabase, color: "#CC2927" },
         { label: "SQLite", Icon: FaDatabase, color: "#003B57" },
-        { label: "Bootstrap", Icon: FaBootstrap, color: "#7952B3" }
+        { label: "Bootstrap", Icon: FaBootstrap, color: "#7952B3" },
+        { label: "React JS", Icon: FaReact, color: "#61DAFB" }
     ];
     const loop = [...skills, ...skills];
 

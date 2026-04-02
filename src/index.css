@@ -106,7 +106,7 @@ nav a:hover::after {
 }
 
 .hero-content h1 {
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 800;
   margin-bottom: 10px;
 }
@@ -180,6 +180,7 @@ nav a:hover::after {
 .section {
   padding: 100px 10%;
   text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .section h2 {
@@ -253,6 +254,37 @@ nav a:hover::after {
 }
 
 /* =====================
+   EDUCATION BLOCK
+===================== */
+.education-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.education-block .edu-icon {
+  font-size: 1.8rem;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.education-block .edu-institution {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.education-block .edu-degree {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* =====================
    GLASS EFFECT REUSABLE
 ===================== */
 .glass-card {
@@ -261,6 +293,15 @@ nav a:hover::after {
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-card,
+  .glass,
+  .skill-card,
+  .project-card {
+    background: rgba(15, 23, 42, 0.85);
+  }
 }
 
 /* =====================

@@ -19,6 +19,12 @@ const projects = [
         desc: "A mobile card game application based on the classic Blackjack rules. Built with Java for Android devices.",
         tags: ["Flutter", "Android Studio", "SQLite"],
         link: "#"
+    },
+    {
+        title: "Kyaw Kyar Car Showroom",
+        desc: "A React JS web application for buying, selling, and promoting cars. Features include vehicle listings, search filters, and dealer contact.",
+        tags: ["React JS"],
+        link: "#"
     }
 ];
 

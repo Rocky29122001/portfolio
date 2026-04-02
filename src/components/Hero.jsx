@@ -12,7 +12,7 @@ const Hero = () => {
                 className="hero-image"
                 initial={{ scale: 0.7, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.6 }}
             >
                 <img src={profile} alt="Naing Khant" />
             </Motion.div>
@@ -22,16 +22,17 @@ const Hero = () => {
                 variants={fadeUp}
                 initial="hidden"
                 animate="show"
+                transition={{ duration: 0.7, delay: 0.3 }}
             >
                 <h1 className="glow">
-                    Hello, I'm <span>Naing Khant</span>
+                    Hello, I'm <span style={{ background: "linear-gradient(90deg, #38bdf8, #0ea5e9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Naing Khant</span>
                 </h1>
 
                 <h3>
                     I am a <Typing />
                 </h3>
 
-                <p>
+                <p style={{ opacity: 0.85 }}>
                     Backend-focused software developer passionate about
                     scalable, secure, and real-world systems.
                 </p>

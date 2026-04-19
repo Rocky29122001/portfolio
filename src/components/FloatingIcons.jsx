@@ -1,6 +1,5 @@
 import { motion as Motion } from "framer-motion";
-import { FaHtml5, FaCss3Alt, FaJs, FaPhp, FaLaravel, FaGithub, FaPython } from "react-icons/fa";
-import { TbBrandCSharp } from "react-icons/tb";
+import { FaHtml5, FaCss3Alt, FaJs, FaPhp, FaLaravel, FaGithub, FaPython, FaReact } from "react-icons/fa";
 
 const icons = [
     { Icon: FaHtml5, color: "#e34f26", top: "15%", left: "10%", delay: 0 },
@@ -10,7 +9,7 @@ const icons = [
     { Icon: FaLaravel, color: "#ff2d20", top: "10%", left: "70%", delay: 3 },
     { Icon: FaGithub, color: "#ffffff", top: "85%", left: "40%", delay: 5 },
     { Icon: FaPython, color: "#306998", top: "40%", left: "5%", delay: 2.5 },
-    { Icon: TbBrandCSharp, color: "#9b4993", top: "50%", left: "90%", delay: 1.5 },
+    { Icon: FaReact, color: "#61dafb", top: "50%", left: "90%", delay: 1.5 },
 ];
 
 const floatAnimation = {

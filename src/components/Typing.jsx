@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 const texts = [
     "Backend Developer",
     "Web Developer",
-    "C# Developer",
-    "PHP Developer"
+    "PHP Developer",
+    "Laravel Developer"
 ];
 
 const Typing = () => {

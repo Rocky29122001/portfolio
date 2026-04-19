@@ -28,7 +28,10 @@ const Navbar = () => {
 
     return (
         <header>
-            <div className="logo">Naing Khant</div>
+            <a href="#home" className="logo logo-with-mark" onClick={() => setOpen(false)} aria-label="Naing Khant home">
+                <img src="/logo.svg" width="40" height="40" alt="" />
+                <span>Naing Khant</span>
+            </a>
 
             <nav className={open ? "active" : ""} role="navigation" aria-label="Primary">
                 <a

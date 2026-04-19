@@ -9,9 +9,9 @@ import {
     FaCss3Alt,
     FaBootstrap,
     FaDatabase,
-    FaMobileAlt
+    FaReact,
 } from "react-icons/fa";
-import { TbBrandCSharp } from "react-icons/tb";
+import { SiFlutter } from "react-icons/si";
 
 const Skills = () => {
     const skills = [
@@ -19,11 +19,11 @@ const Skills = () => {
         { label: "Laravel", Icon: FaLaravel, color: "#FF2D20" },
         { label: "Python", Icon: FaPython, color: "#3776AB" },
         { label: "Django", Icon: FaPython, color: "#092E20" },
-        { label: "Flutter", Icon: FaMobileAlt, color: "#02569B" },
-        { label: "C#", Icon: TbBrandCSharp, color: "#9b4993" },
         { label: "HTML", Icon: FaHtml5, color: "#E34F26" },
         { label: "CSS", Icon: FaCss3Alt, color: "#1572B6" },
         { label: "JavaScript", Icon: FaJs, color: "#F7DF1E" },
+        { label: "React", Icon: FaReact, color: "#61DAFB" },
+        { label: "Flutter", Icon: SiFlutter, color: "#54C5F8" },
         { label: "jQuery", Icon: FaJs, color: "#0769AD" },
         { label: "MySQL", Icon: FaDatabase, color: "#00618A" },
         { label: "SQL Server", Icon: FaDatabase, color: "#CC2927" },

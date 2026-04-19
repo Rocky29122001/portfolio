@@ -23,7 +23,7 @@ const About = () => {
                         My journey in tech is driven by a curiosity to understand how robust systems are built and optimized.
                     </p>
                     <p>
-                        Specializing in <strong>C#</strong>, <strong>PHP</strong>, and <strong>SQL Server</strong>, I focus on creating scalable, efficient, and secure backend architectures. 
+                        Specializing in <strong>PHP</strong>, <strong>Laravel</strong>, and <strong>SQL Server</strong>, I focus on creating scalable, efficient, and secure backend architectures. 
                         I thrive on solving complex logic puzzles and am constantly expanding my skillset to stay ahead in the evolving tech landscape.
                     </p>
                 </Motion.div>

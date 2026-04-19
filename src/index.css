@@ -48,6 +48,23 @@ header {
   font-weight: 700;
   color: var(--primary);
   letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.logo-with-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-with-mark img {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+.logo-with-mark span {
+  color: var(--primary);
 }
 
 nav a {
@@ -305,6 +322,22 @@ nav a:hover::after {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 26px;
+}
+
+.projects-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-top: 8px;
+}
+
+.projects-group-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: left;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
 }
 
 .skill-card,

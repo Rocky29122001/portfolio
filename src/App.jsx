@@ -6,7 +6,6 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import Stat from "./components/Stat";
 
 function App() {
   const year = new Date().getFullYear();
@@ -31,7 +30,6 @@ function App() {
     <>
       <Navbar />
       <Hero />
-      <Stat />
       <About />
       <Skills />
       <Projects />

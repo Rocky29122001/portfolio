@@ -2,7 +2,7 @@ import { motion as Motion } from "framer-motion";
 import { fadeUp, stagger } from "../animations";
 import { workProjects, academicProjects } from "../data/projects";
 
-const ProjectGrid = ({ items, showDetail }) => (
+const ProjectGrid = ({ items, showDetail, onNavigate }) => (
   <Motion.div
     className="project-box"
     variants={stagger}
@@ -27,7 +27,19 @@ const ProjectGrid = ({ items, showDetail }) => (
           ))}
         </div>
         {showDetail && p.showDetail !== false && p.link ? (
-          <a href={p.link} className="btn project-btn" aria-label={`View ${p.title}`}>
+          <a
+            href={p.link}
+            className="btn project-btn"
+            aria-label={`View ${p.title}`}
+            onClick={(event) => {
+              if (!p.link.startsWith("/")) {
+                return;
+              }
+
+              event.preventDefault();
+              onNavigate(p.link);
+            }}
+          >
             View Project
           </a>
         ) : null}
@@ -36,7 +48,7 @@ const ProjectGrid = ({ items, showDetail }) => (
   </Motion.div>
 );
 
-const Projects = () => (
+const Projects = ({ onNavigate }) => (
   <section className="section" id="projects">
     <Motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
       Projects
@@ -53,7 +65,7 @@ const Projects = () => (
         >
           Work projects
         </Motion.h3>
-        <ProjectGrid items={workProjects} showDetail={false} />
+        <ProjectGrid items={workProjects} showDetail={false} onNavigate={onNavigate} />
       </div>
 
       <div className="projects-group">
@@ -66,7 +78,7 @@ const Projects = () => (
         >
           Academic projects
         </Motion.h3>
-        <ProjectGrid items={academicProjects} showDetail />
+        <ProjectGrid items={academicProjects} showDetail onNavigate={onNavigate} />
       </div>
     </div>
   </section>

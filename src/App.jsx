@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion as Motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaInstagram } from "react-icons/fa";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -6,10 +7,39 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import BulletinBoardDetail from "./components/BulletinBoardDetail";
 
 function App() {
   const year = new Date().getFullYear();
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const isBulletinBoardDetail = currentPath === "/projects/bulletin-board";
+
+  const navigate = (to) => {
+    const target = new URL(to, window.location.origin);
+    window.history.pushState({}, "", `${target.pathname}${target.hash}`);
+    setCurrentPath(target.pathname);
+
+    window.setTimeout(() => {
+      if (target.hash) {
+        document.querySelector(target.hash)?.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 80);
+  };
+
   useEffect(() => {
+    const handlePopState = () => setCurrentPath(window.location.pathname);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (isBulletinBoardDetail) {
+      return undefined;
+    }
+
     const elements = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(
       entries => {
@@ -24,16 +54,32 @@ function App() {
     );
     elements.forEach(el => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [isBulletinBoardDetail]);
 
   return (
     <>
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+      <AnimatePresence mode="wait">
+        <Motion.div
+          key={currentPath}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.32, ease: "easeOut" }}
+        >
+          {isBulletinBoardDetail ? (
+            <BulletinBoardDetail onNavigate={navigate} />
+          ) : (
+            <>
+              <Navbar />
+              <Hero />
+              <About />
+              <Skills />
+              <Projects onNavigate={navigate} />
+              <Contact />
+            </>
+          )}
+        </Motion.div>
+      </AnimatePresence>
       <footer>
         <div className="footer-content">
           <p>© {year} Naing Khant. All rights reserved.</p>

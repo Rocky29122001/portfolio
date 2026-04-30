@@ -42,7 +42,7 @@ export const academicProjects = [
     title: "Bulletin Board System",
     desc: "Community forum with authentication, posts, and comment threads for announcements and discussion.",
     tags: ["PHP", "Laravel", "MySQL", "jQuery", "CSS"],
-    link: "#",
+    link: "/projects/bulletin-board",
     showDetail: true,
   },
   {

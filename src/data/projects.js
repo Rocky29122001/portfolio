@@ -46,9 +46,9 @@ export const academicProjects = [
     showDetail: true,
   },
   {
-    title: "21 Game Android App",
-    desc: "Mobile card game based on classic Blackjack rules, with local persistence and responsive UI.",
-    tags: ["Android Studio", "SQLite", "Mobile"],
+    title: "21 Game Blackjack App",
+    desc: "Blackjack card game with a Flutter client, Laravel API backend, and MySQL persistence.",
+    tags: ["Laravel", "Flutter", "MySQL"],
     link: "/projects/blackjack",
     showDetail: true,
   },

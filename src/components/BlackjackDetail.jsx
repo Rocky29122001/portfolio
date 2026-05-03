@@ -4,9 +4,10 @@ import {
   FaCheck,
   FaDatabase,
   FaGamepad,
-  FaMobileAlt,
+  FaLaptopCode,
   FaRedo,
   FaSave,
+  FaServer,
   FaTrophy,
 } from "react-icons/fa";
 import { fadeUp } from "../animations";
@@ -17,12 +18,16 @@ const gameFeatures = [
     text: "The app follows the classic 21 target: draw cards, compare totals, and avoid going over the limit.",
   },
   {
-    title: "Mobile-first play",
-    text: "The Android interface keeps card totals, actions, and round status readable on small screens.",
+    title: "Flutter game client",
+    text: "The Flutter interface keeps card totals, actions, and round status readable across common screen sizes.",
   },
   {
-    title: "Local persistence",
-    text: "SQLite stores local game data so useful state can remain available between sessions.",
+    title: "Laravel API backend",
+    text: "Laravel handles game records, player data, and server-side API endpoints for the Flutter client.",
+  },
+  {
+    title: "MySQL persistence",
+    text: "MySQL stores player progress, game history, and useful round data for later retrieval.",
   },
   {
     title: "Clear round feedback",
@@ -31,10 +36,10 @@ const gameFeatures = [
 ];
 
 const implementationNotes = [
-  "Android Studio project structure",
-  "SQLite for local persistence",
-  "Card and score state handled locally",
-  "Responsive mobile game layout",
+  "Flutter app interface",
+  "Laravel REST API backend",
+  "MySQL database persistence",
+  "Card and score state handled through app logic",
 ];
 
 const AnimatedSection = ({ className, children }) => (
@@ -66,21 +71,21 @@ const BlackjackDetail = ({ onNavigate }) => (
         </a>
         <p className="detail-kicker">Academic project</p>
       </div>
-      <h1>21 Game Android App</h1>
+      <h1>21 Game Blackjack App</h1>
       <p>
-        A mobile card game based on Blackjack rules. Players draw cards toward
-        a total of 21, compare scores, and receive immediate round feedback in a
-        compact Android interface backed by local SQLite storage.
+        A Blackjack card game built with Flutter, Laravel, and MySQL. Players
+        draw cards toward a total of 21, compare scores, and receive immediate
+        round feedback through a Flutter client backed by a Laravel API.
       </p>
       <div className="detail-tags" aria-label="Technologies used">
-        <span>Android Studio</span>
-        <span>SQLite</span>
-        <span>Mobile UI</span>
+        <span>Laravel</span>
+        <span>Flutter</span>
+        <span>MySQL</span>
       </div>
     </AnimatedSection>
 
     <AnimatedSection className="detail-section blackjack-showcase-section">
-      <div className="phone-game-preview" aria-label="Blackjack Android game preview">
+      <div className="phone-game-preview" aria-label="Blackjack Flutter game preview">
         <div className="phone-frame">
           <div className="phone-speaker" />
           <div className="game-screen">
@@ -115,7 +120,7 @@ const BlackjackDetail = ({ onNavigate }) => (
       </div>
       <div className="login-showcase-copy">
         <p className="detail-kicker">Game loop</p>
-        <h2>Fast card rounds built for Android</h2>
+        <h2>Fast card rounds built with Flutter</h2>
         <p>
           The interface keeps the main decisions visible: current cards, player
           total, dealer area, and action buttons. This makes each round easy to
@@ -135,14 +140,15 @@ const BlackjackDetail = ({ onNavigate }) => (
     <AnimatedSection className="detail-section">
       <div>
         <p className="detail-kicker">Features</p>
-        <h2>Rules, state, and mobile interaction</h2>
+        <h2>Rules, state, and API-backed play</h2>
       </div>
       <div className="detail-grid">
         {gameFeatures.map((item) => (
           <article className="detail-card" key={item.title}>
             {item.title.includes("Blackjack") ? <FaGamepad aria-hidden="true" /> : null}
-            {item.title.includes("Mobile") ? <FaMobileAlt aria-hidden="true" /> : null}
-            {item.title.includes("persistence") ? <FaDatabase aria-hidden="true" /> : null}
+            {item.title.includes("Flutter") ? <FaLaptopCode aria-hidden="true" /> : null}
+            {item.title.includes("Laravel") ? <FaServer aria-hidden="true" /> : null}
+            {item.title.includes("MySQL") ? <FaDatabase aria-hidden="true" /> : null}
             {item.title.includes("feedback") ? <FaTrophy aria-hidden="true" /> : null}
             <h3>{item.title}</h3>
             <p>{item.text}</p>
@@ -157,8 +163,8 @@ const BlackjackDetail = ({ onNavigate }) => (
         <h2>Simple decisions with clear outcomes</h2>
         <p>
           The game flow moves through dealing, drawing, standing, score checking,
-          and saving relevant local data. The UI keeps each state distinct so the
-          user understands what action is available next.
+          and saving relevant game data through the backend. The UI keeps each
+          state distinct so the user understands what action is available next.
         </p>
       </div>
       <div className="blackjack-flow-grid">
@@ -166,7 +172,7 @@ const BlackjackDetail = ({ onNavigate }) => (
           ["Deal", "Start a new round and show initial cards."],
           ["Hit or stand", "Let the player draw or hold their total."],
           ["Compare", "Check player and dealer totals against 21."],
-          ["Save", "Store useful game state locally with SQLite."],
+          ["Save", "Store useful game state in MySQL through Laravel."],
         ].map(([title, text]) => (
           <article className="blackjack-flow-card" key={title}>
             {title === "Deal" ? <FaRedo aria-hidden="true" /> : null}
@@ -185,10 +191,10 @@ const BlackjackDetail = ({ onNavigate }) => (
         <h2>What the app demonstrates</h2>
       </div>
       <p>
-        The project demonstrates Android UI construction, game-state handling,
-        local data storage, and user feedback for a rules-based mobile app. It is
-        small enough to stay focused, but complete enough to show practical app
-        development skills.
+        The project demonstrates Flutter UI construction, Laravel API design,
+        MySQL data storage, game-state handling, and user feedback for a
+        rules-based card game. It is small enough to stay focused, but complete
+        enough to show practical full-stack app development skills.
       </p>
     </AnimatedSection>
   </main>

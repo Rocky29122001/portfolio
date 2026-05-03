@@ -8,11 +8,19 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import BulletinBoardDetail from "./components/BulletinBoardDetail";
+import CaneHandicraftDetail from "./components/CaneHandicraftDetail";
+import BlackjackDetail from "./components/BlackjackDetail";
+
+const detailPages = {
+  "/projects/bulletin-board": BulletinBoardDetail,
+  "/projects/cane-handicraft": CaneHandicraftDetail,
+  "/projects/blackjack": BlackjackDetail,
+};
 
 function App() {
   const year = new Date().getFullYear();
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  const isBulletinBoardDetail = currentPath === "/projects/bulletin-board";
+  const DetailPage = detailPages[currentPath];
 
   const navigate = (to) => {
     const target = new URL(to, window.location.origin);
@@ -36,7 +44,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isBulletinBoardDetail) {
+    if (DetailPage) {
       return undefined;
     }
 
@@ -54,7 +62,7 @@ function App() {
     );
     elements.forEach(el => observer.observe(el));
     return () => observer.disconnect();
-  }, [isBulletinBoardDetail]);
+  }, [DetailPage]);
 
   return (
     <>
@@ -66,8 +74,8 @@ function App() {
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.32, ease: "easeOut" }}
         >
-          {isBulletinBoardDetail ? (
-            <BulletinBoardDetail onNavigate={navigate} />
+          {DetailPage ? (
+            <DetailPage onNavigate={navigate} />
           ) : (
             <>
               <Navbar />

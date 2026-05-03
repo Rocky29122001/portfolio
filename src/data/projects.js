@@ -35,7 +35,7 @@ export const academicProjects = [
     title: "Myanmar Cane Handicraft Platform",
     desc: "E-commerce platform for traditional Myanmar cane crafts: product catalog, cart, and admin dashboard.",
     tags: ["Python", "Django", "Bootstrap", "JavaScript"],
-    link: "#",
+    link: "/projects/cane-handicraft",
     showDetail: true,
   },
   {
@@ -49,7 +49,7 @@ export const academicProjects = [
     title: "21 Game Android App",
     desc: "Mobile card game based on classic Blackjack rules, with local persistence and responsive UI.",
     tags: ["Android Studio", "SQLite", "Mobile"],
-    link: "#",
+    link: "/projects/blackjack",
     showDetail: true,
   },
 ];

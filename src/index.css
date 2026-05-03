@@ -1317,6 +1317,447 @@ nav a:hover::after {
   font-size: 1.08rem;
 }
 
+.craft-detail-page {
+  background:
+    radial-gradient(circle at 14% 10%, rgba(34, 197, 94, 0.14), transparent 30%),
+    radial-gradient(circle at 86% 6%, rgba(245, 158, 11, 0.13), transparent 30%),
+    linear-gradient(180deg, #020617 0%, #111827 52%, #030712 100%);
+}
+
+.blackjack-detail-page {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(239, 68, 68, 0.13), transparent 30%),
+    radial-gradient(circle at 84% 8%, rgba(34, 197, 94, 0.14), transparent 30%),
+    linear-gradient(180deg, #020617 0%, #0f172a 48%, #030712 100%);
+}
+
+.craft-showcase-section,
+.blackjack-showcase-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(330px, 0.88fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.craft-store-preview {
+  overflow: hidden;
+  border: 1px solid rgba(217, 249, 157, 0.2);
+  border-radius: 8px;
+  background: #fff7ed;
+  color: #1f2937;
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.32);
+}
+
+.craft-nav {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  background: #14532d;
+  color: #f7fee7;
+}
+
+.craft-nav strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  font-size: 1.15rem;
+}
+
+.craft-nav span {
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.craft-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 999px;
+  color: #14532d;
+  background: #fef3c7;
+  padding: 8px 12px;
+  font-weight: 800;
+}
+
+.craft-hero-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 26px;
+  align-items: center;
+  padding: 30px;
+  background:
+    linear-gradient(135deg, rgba(254, 243, 199, 0.9), rgba(220, 252, 231, 0.92)),
+    #fefce8;
+}
+
+.craft-hero-preview small {
+  color: #166534;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.craft-hero-preview h2 {
+  color: #1f2937;
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  line-height: 1.08;
+  margin: 10px 0;
+}
+
+.craft-hero-preview p {
+  color: #4b5563;
+  max-width: 460px;
+}
+
+.woven-basket {
+  position: relative;
+  width: 176px;
+  height: 150px;
+  border: 10px solid #92400e;
+  border-top: 0;
+  border-radius: 0 0 62px 62px;
+  background:
+    repeating-linear-gradient(90deg, rgba(146, 64, 14, 0.42) 0 10px, rgba(217, 119, 6, 0.42) 10px 20px),
+    repeating-linear-gradient(0deg, #fbbf24 0 12px, #d97706 12px 18px);
+  box-shadow: inset 0 0 0 4px rgba(254, 243, 199, 0.28), 0 18px 26px rgba(120, 53, 15, 0.18);
+}
+
+.woven-basket::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: -54px;
+  height: 86px;
+  border: 10px solid #92400e;
+  border-bottom: 0;
+  border-radius: 90px 90px 0 0;
+}
+
+.woven-basket span {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(120, 53, 15, 0.38);
+}
+
+.woven-basket span:nth-child(1) {
+  top: 35px;
+}
+
+.woven-basket span:nth-child(2) {
+  top: 72px;
+}
+
+.woven-basket span:nth-child(3) {
+  top: 108px;
+}
+
+.craft-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 18px;
+}
+
+.craft-product-card {
+  min-height: 196px;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(120, 53, 15, 0.08);
+}
+
+.craft-product-card strong {
+  color: #1f2937;
+}
+
+.craft-product-card span {
+  color: #166534;
+  font-weight: 900;
+}
+
+.craft-product-card button {
+  align-self: end;
+  border: 0;
+  border-radius: 6px;
+  color: #ffffff;
+  background: #15803d;
+  padding: 9px 10px;
+  font-weight: 800;
+}
+
+.craft-product-art {
+  min-height: 76px;
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(45deg, rgba(146, 64, 14, 0.45) 0 8px, rgba(251, 191, 36, 0.55) 8px 16px),
+    #fde68a;
+}
+
+.craft-product-art-2 {
+  border-radius: 50%;
+}
+
+.craft-product-art-3 {
+  background:
+    repeating-linear-gradient(90deg, rgba(146, 64, 14, 0.45) 0 8px, rgba(252, 211, 77, 0.64) 8px 16px),
+    #fef3c7;
+}
+
+.craft-dashboard-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(217, 249, 157, 0.18);
+  border-radius: 8px;
+  background: #f8fafc;
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.3);
+}
+
+.craft-dashboard-stat,
+.craft-dashboard-table {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.craft-dashboard-stat {
+  min-height: 132px;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  text-align: center;
+}
+
+.craft-dashboard-stat svg {
+  color: #15803d;
+  font-size: 1.35rem;
+}
+
+.craft-dashboard-stat span {
+  color: #111827;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.craft-dashboard-stat small {
+  color: #64748b;
+  font-weight: 800;
+}
+
+.craft-dashboard-table {
+  grid-column: 1 / -1;
+  overflow-x: auto;
+  padding: 18px;
+}
+
+.craft-dashboard-table > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.craft-dashboard-table > div span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  color: #64748b;
+  padding: 8px 12px;
+  font-size: 0.84rem;
+}
+
+.craft-dashboard-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.craft-dashboard-table th,
+.craft-dashboard-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.craft-dashboard-table th {
+  color: #166534;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.phone-game-preview {
+  display: grid;
+  place-items: center;
+  min-height: 620px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 40% 20%, rgba(34, 197, 94, 0.22), transparent 34%),
+    linear-gradient(135deg, #111827, #020617);
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.34);
+}
+
+.phone-frame {
+  width: min(330px, 100%);
+  padding: 16px 12px 18px;
+  border: 8px solid #020617;
+  border-radius: 34px;
+  background: #0f172a;
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.42);
+}
+
+.phone-speaker {
+  width: 78px;
+  height: 6px;
+  margin: 0 auto 12px;
+  border-radius: 999px;
+  background: #334155;
+}
+
+.game-screen {
+  min-height: 548px;
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 26%, rgba(34, 197, 94, 0.24), transparent 30%),
+    linear-gradient(180deg, #064e3b, #052e2b);
+  color: #ffffff;
+}
+
+.game-topbar,
+.dealer-area,
+.player-area,
+.round-status,
+.game-actions {
+  border-radius: 8px;
+}
+
+.game-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #dcfce7;
+  font-size: 0.84rem;
+}
+
+.dealer-area,
+.player-area {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  background: rgba(2, 6, 23, 0.24);
+  border: 1px solid rgba(187, 247, 208, 0.16);
+}
+
+.dealer-area small,
+.player-area small {
+  color: #bbf7d0;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.card-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.playing-card {
+  width: 66px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #111827;
+  font-size: 1.28rem;
+  font-weight: 900;
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.26);
+}
+
+.playing-card.red {
+  color: #dc2626;
+}
+
+.hidden-card {
+  color: #dbeafe;
+  background:
+    repeating-linear-gradient(45deg, #1d4ed8 0 8px, #2563eb 8px 16px),
+    #2563eb;
+}
+
+.round-status {
+  display: grid;
+  place-items: center;
+  min-height: 42px;
+  color: #14532d;
+  background: #fef3c7;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.game-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.game-actions button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  color: #052e16;
+  background: #86efac;
+  font-weight: 900;
+}
+
+.blackjack-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.blackjack-flow-card {
+  min-height: 158px;
+  padding: 20px;
+  border: 1px solid rgba(134, 239, 172, 0.18);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(20, 83, 45, 0.68), rgba(15, 23, 42, 0.82));
+}
+
+.blackjack-flow-card svg {
+  color: #86efac;
+  margin-bottom: 14px;
+}
+
+.blackjack-flow-card h3 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.blackjack-flow-card p {
+  color: #cbd5e1;
+}
+
 /* =====================
    ABOUT
 ===================== */
@@ -1505,12 +1946,22 @@ nav a:hover::after {
     gap: 22px;
   }
 
+  .craft-showcase-section,
+  .blackjack-showcase-section {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
   .login-showcase-section .login-preview {
     width: min(560px, 100%);
     margin: 0 auto;
   }
 
   .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .blackjack-flow-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1537,6 +1988,15 @@ nav a:hover::after {
 
   .user-table-preview table {
     min-width: 640px;
+  }
+
+  .craft-hero-preview {
+    grid-template-columns: minmax(0, 1fr) 150px;
+  }
+
+  .woven-basket {
+    width: 146px;
+    height: 126px;
   }
 }
 
@@ -1665,6 +2125,50 @@ nav a:hover::after {
   }
 
   .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .craft-nav {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .craft-nav strong {
+    margin-right: 0;
+  }
+
+  .craft-hero-preview {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .woven-basket {
+    justify-self: center;
+    margin-top: 36px;
+  }
+
+  .craft-product-grid,
+  .craft-dashboard-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .craft-dashboard-table > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .phone-game-preview {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .phone-frame {
+    max-width: 330px;
+  }
+
+  .blackjack-flow-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1806,6 +2310,28 @@ nav a:hover::after {
   .post-toolbar {
     grid-template-columns: 1fr;
     margin: 0 10px 12px;
+  }
+
+  .craft-product-grid {
+    padding: 12px;
+  }
+
+  .craft-dashboard-preview {
+    padding: 12px;
+  }
+
+  .game-screen {
+    min-height: 500px;
+    padding: 14px;
+  }
+
+  .playing-card {
+    width: 56px;
+    height: 80px;
+  }
+
+  .game-actions {
+    grid-template-columns: 1fr;
   }
 
   .post-card-grid {

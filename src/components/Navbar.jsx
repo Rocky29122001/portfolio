@@ -4,6 +4,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState("home");
+    const navIcon = "/nav-icon.svg";
 
     useEffect(() => {
         const ids = ["home", "about", "skills", "projects", "contact"];
@@ -28,7 +29,19 @@ const Navbar = () => {
 
     return (
         <header>
-            <div className="logo">Naing Khant</div>
+            <a href="#home" className="logo logo-with-mark" onClick={() => setOpen(false)} aria-label="Naing Khant home">
+                <img
+                    src={navIcon}
+                    width="40"
+                    height="40"
+                    alt=""
+                    onError={(event) => {
+                        event.currentTarget.onerror = null;
+                        event.currentTarget.src = "/logo.svg";
+                    }}
+                />
+                <span>Naing Khant</span>
+            </a>
 
             <nav className={open ? "active" : ""} role="navigation" aria-label="Primary">
                 <a

@@ -40,7 +40,7 @@ const Navbar = () => {
                         event.currentTarget.src = "/logo.svg";
                     }}
                 />
-                <span>Naing Khant</span>
+                <span>naingkhant<i className="logo-dot">.</i></span>
             </a>
 
             <nav className={open ? "active" : ""} role="navigation" aria-label="Primary">

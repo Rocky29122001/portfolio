@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion as Motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, MotionConfig, motion as Motion, useScroll } from "framer-motion";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import { FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaInstagram } from "react-icons/fa";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -10,8 +12,10 @@ import Contact from "./components/Contact";
 import BulletinBoardDetail from "./components/BulletinBoardDetail";
 import CaneHandicraftDetail from "./components/CaneHandicraftDetail";
 import BlackjackDetail from "./components/BlackjackDetail";
+import CafemonoDetail from "./components/CafemonoDetail";
 
 const detailPages = {
+  "/projects/cafemono": CafemonoDetail,
   "/projects/bulletin-board": BulletinBoardDetail,
   "/projects/cane-handicraft": CaneHandicraftDetail,
   "/projects/blackjack": BlackjackDetail,
@@ -19,8 +23,32 @@ const detailPages = {
 
 function App() {
   const year = new Date().getFullYear();
+  const { scrollYProgress } = useScroll();
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const lenisRef = useRef(null);
   const DetailPage = detailPages[currentPath];
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return undefined;
+    }
+
+    const lenis = new Lenis({ anchors: true });
+    lenisRef.current = lenis;
+
+    let rafId;
+    const raf = (time) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    };
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
 
   const navigate = (to) => {
     const target = new URL(to, window.location.origin);
@@ -28,12 +56,22 @@ function App() {
     setCurrentPath(target.pathname);
 
     window.setTimeout(() => {
+      const lenis = lenisRef.current;
+
       if (target.hash) {
-        document.querySelector(target.hash)?.scrollIntoView({ behavior: "smooth" });
+        if (lenis) {
+          lenis.scrollTo(target.hash);
+        } else {
+          document.querySelector(target.hash)?.scrollIntoView({ behavior: "smooth" });
+        }
         return;
       }
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     }, 80);
   };
 
@@ -65,7 +103,8 @@ function App() {
   }, [DetailPage]);
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
+      <Motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <AnimatePresence mode="wait">
         <Motion.div
           key={currentPath}
@@ -110,7 +149,7 @@ function App() {
           </div>
         </div>
       </footer>
-    </>
+    </MotionConfig>
   );
 }
 

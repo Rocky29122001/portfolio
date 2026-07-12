@@ -32,6 +32,14 @@ export const workProjects = [
 
 export const academicProjects = [
   {
+    title: "Cafemono",
+    desc: "A beautifully crafted cafe website with elegant menu browsing, warm ambiance visuals, and a delightful ordering experience.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    link: "/projects/cafemono",
+    showDetail: true,
+    demoUrl: "https://cafemono.vercel.app/",
+  },
+  {
     title: "Myanmar Cane Handicraft Platform",
     desc: "E-commerce platform for traditional Myanmar cane crafts: product catalog, cart, and admin dashboard.",
     tags: ["Python", "Django", "Bootstrap", "JavaScript"],

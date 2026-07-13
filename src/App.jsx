@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaInstagram } from "react-icons/fa";
 import Navbar from "./components/Navbar";
+import Preloader from "./components/Preloader";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -25,6 +26,7 @@ function App() {
   const year = new Date().getFullYear();
   const { scrollYProgress } = useScroll();
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [booting, setBooting] = useState(true);
   const lenisRef = useRef(null);
   const DetailPage = detailPages[currentPath];
 
@@ -104,6 +106,9 @@ function App() {
 
   return (
     <MotionConfig reducedMotion="user">
+      <AnimatePresence>
+        {booting && <Preloader onFinish={() => setBooting(false)} />}
+      </AnimatePresence>
       <Motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <AnimatePresence mode="wait">
         <Motion.div

@@ -28,6 +28,134 @@ html {
   scroll-behavior: smooth;
 }
 
+/* =====================
+   PRELOADER
+===================== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999; /* above the navbar and scroll progress bar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* dark ground in the site palette, split into belts so the exit can peel them away */
+.pre-belt {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: #070d1a; /* flat so adjacent belts read as one seamless ground */
+  transform-origin: 50% 100%;
+}
+
+.pre-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  color: var(--text);
+}
+
+.pre-frame {
+  position: relative;
+  width: min(240px, 56vw);
+  aspect-ratio: 1;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 700px;
+}
+
+.pre-plus {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  color: var(--primary);
+}
+
+.pre-plus svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+.pre-plus.tl { top: -18px; left: -18px; }
+.pre-plus.tr { top: -18px; right: -18px; }
+.pre-plus.bl { bottom: -18px; left: -18px; }
+.pre-plus.br { bottom: -18px; right: -18px; }
+
+.pre-logo-3d {
+  width: 58%;
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+}
+
+.pre-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 26px rgba(56, 189, 248, 0.28));
+}
+
+.pre-tagline {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.pre-tag-word {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.pre-tag-dot {
+  font-style: normal;
+  margin: 0 0.7em;
+  color: var(--primary);
+}
+
+.pre-counter {
+  position: absolute;
+  top: calc(100% + 52px);
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pre-slot {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.pre-slot-strip {
+  display: block;
+}
+
+.pre-slot-strip span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+.pre-counter-unit {
+  margin-left: 0.35em;
+  color: var(--muted);
+}
+
 body {
   background:
     radial-gradient(1100px 620px at 12% -6%, rgba(56, 189, 248, 0.12), transparent 60%),

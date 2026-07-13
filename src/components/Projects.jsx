@@ -11,13 +11,17 @@ import SectionHeading from "./SectionHeading";
 import { fadeUp } from "../animations";
 import { workProjects, academicProjects } from "../data/projects";
 
-// ponytail: the spiral is sampled, not solved — 5 keyframes per card fed to
-// useTransform. Cards sit in their real grid slot; the transform animates
-// FROM a spiral offset TO identity, so the final layout is plain CSS grid.
-const SPIRAL_T = [0, 0.25, 0.5, 0.75, 1];
-const SPIRAL_TURN = Math.PI * 1.5; // how far around the spiral each card travels
-const CARD_SPAN = 0.38; // fraction of scroll progress one card animates over
-const LAST_LANDING = 0.9; // last card settles here, leaving a beat before unpin
+// trionn-style vortex: the spiral is sampled, not solved — keyframes per card
+// fed to useTransform. Cards sit in their real grid slot; the transform
+// animates FROM a spiral-formation offset TO identity, so the final layout is
+// plain CSS grid. Unlike a one-by-one entrance, every card is on screen from
+// the start, orbiting the viewport center as one formation; scroll unwinds the
+// whole vortex until each card settles into its slot.
+const SPIRAL_T = [0, 0.2, 0.4, 0.6, 0.8, 1];
+const SPIRAL_SPIN = Math.PI * 1.4; // how far the whole formation rotates while unwinding
+const CARD_SPAN = 0.6; // fraction of scroll progress one card animates over
+const STAGGER_WINDOW = 0.18; // spread of start times: outer cards land last
+const FORMATION_START = 0.04; // beat before the vortex starts unwinding
 
 const ProjectCard = ({ p, index, group, showDetail, onNavigate }) => (
   <article className="project-card">
@@ -66,35 +70,37 @@ const ProjectCard = ({ p, index, group, showDetail, onNavigate }) => (
   </article>
 );
 
-const SpiralCard = ({ progress, start, end, index, radius, children }) => {
+const SpiralCard = ({ progress, start, end, index, count, radius, children }) => {
   const range = SPIRAL_T.map((t) => start + t * (end - start));
-  const dir = index % 2 === 0 ? 1 : -1; // alternate spin direction per card
-  const phase = index * (Math.PI * 0.66); // each card enters from a different angle
+
+  // evenly spread around the circle, inner-to-outer rings by index
+  const baseAngle = (index / count) * Math.PI * 2 - Math.PI / 2;
+  const ring = 0.55 + 0.45 * ((index + 1) / count);
+  const angleAt = (t) => baseAngle + (1 - t) * SPIRAL_SPIN;
+  const radiusAt = (t) => Math.pow(1 - t, 0.85) * radius * ring;
+
+  // card tilt starts tangent to its orbit and unwinds to 0 with the vortex
+  const tangentDeg = (((angleAt(0) * 180) / Math.PI + 90 + 180) % 360) - 180;
 
   const x = useTransform(
     progress,
     range,
-    SPIRAL_T.map((t) => {
-      const r = Math.pow(1 - t, 1.2) * radius;
-      return r * Math.cos((1 - t) * SPIRAL_TURN * dir + phase);
-    })
+    SPIRAL_T.map((t) => radiusAt(t) * Math.cos(angleAt(t)))
   );
   const y = useTransform(
     progress,
     range,
-    SPIRAL_T.map((t) => {
-      const r = Math.pow(1 - t, 1.2) * radius;
-      // extra negative Y makes cards fall in from above before settling
-      return r * Math.sin((1 - t) * SPIRAL_TURN * dir + phase) - Math.pow(1 - t, 1.4) * 220;
-    })
+    // 0.62 flattens the orbit into an ellipse so the ring fits the viewport;
+    // the extra term drops the whole formation in from slightly above
+    SPIRAL_T.map((t) => radiusAt(t) * Math.sin(angleAt(t)) * 0.62 - Math.pow(1 - t, 1.3) * 120)
   );
   const rotate = useTransform(
     progress,
     range,
-    SPIRAL_T.map((t) => Math.pow(1 - t, 1.15) * 170 * dir)
+    SPIRAL_T.map((t) => Math.pow(1 - t, 1.05) * tangentDeg)
   );
-  const scale = useTransform(progress, range, [0.4, 0.62, 0.85, 1.05, 1]);
-  const opacity = useTransform(progress, range, [0, 0.85, 1, 1, 1]);
+  const scale = useTransform(progress, range, [0.45, 0.55, 0.7, 0.86, 1.04, 1]);
+  const opacity = useTransform(progress, range, [0, 1, 1, 1, 1, 1]);
 
   return (
     <Motion.div className="spiral-card" style={{ x, y, rotate, scale, opacity }}>
@@ -166,11 +172,11 @@ const SpiralGallery = ({ title, items, group, showDetail, onNavigate }) => {
   }
 
   const n = items.length;
-  const step = n > 1 ? (LAST_LANDING - CARD_SPAN) / (n - 1) : 0;
-  const radius = Math.min(560, (typeof window !== "undefined" ? window.innerWidth : 1200) * 0.45);
+  const step = n > 1 ? STAGGER_WINDOW / (n - 1) : 0;
+  const radius = Math.min(620, (typeof window !== "undefined" ? window.innerWidth : 1200) * 0.5);
 
   return (
-    <div ref={scrollerRef} className="spiral-scroller" style={{ height: `${110 + n * 55}vh` }}>
+    <div ref={scrollerRef} className="spiral-scroller" style={{ height: `${150 + n * 40}vh` }}>
       <div className="spiral-pin">
         <div className="spiral-head">
           <div className="spiral-head-row">
@@ -186,9 +192,10 @@ const SpiralGallery = ({ title, items, group, showDetail, onNavigate }) => {
             <SpiralCard
               key={p.title}
               progress={progress}
-              start={i * step}
-              end={i * step + CARD_SPAN}
+              start={FORMATION_START + i * step}
+              end={FORMATION_START + i * step + CARD_SPAN}
               index={i}
+              count={n}
               radius={radius}
             >
               <ProjectCard p={p} index={i} group={group} showDetail={showDetail} onNavigate={onNavigate} />

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import Projects from '../Projects';
+import { workProjects, academicProjects } from '../../data/projects';
 
 // Mock framer-motion so Motion components render as plain elements
 vi.mock('framer-motion', () => ({
@@ -22,33 +23,44 @@ vi.mock('framer-motion', () => ({
 }));
 
 describe('Projects component', () => {
-  it('renders exactly 4 project cards', () => {
+  it('renders one row per project across both groups', () => {
     render(<Projects />);
-    const cards = document.querySelectorAll('.project-card');
-    expect(cards.length).toBe(4);
+    const rows = document.querySelectorAll('.project-row');
+    expect(rows.length).toBe(workProjects.length + academicProjects.length);
   });
 
-  it('renders the fourth card with title "Kyaw Kyar Car Showroom"', () => {
+  it('renders Work and Academic group headings', () => {
     render(<Projects />);
-    expect(screen.getByText('Kyaw Kyar Car Showroom')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Work' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Academic' })).toBeInTheDocument();
   });
 
-  it('fourth card description mentions buying, selling, and promoting', () => {
+  it('renders every project title', () => {
     render(<Projects />);
-    const desc = screen.getByText(/buying.*selling.*promoting/i);
-    expect(desc).toBeInTheDocument();
+    [...workProjects, ...academicProjects].forEach((p) => {
+      expect(screen.getByText(p.title)).toBeInTheDocument();
+    });
   });
 
-  it('fourth card has tag "React JS"', () => {
+  it('shows a Case Study link for academic projects with a detail page', () => {
     render(<Projects />);
-    const tags = screen.getAllByText('React JS');
-    expect(tags.length).toBeGreaterThan(0);
+    const link = screen.getByRole('link', { name: /view cafemono/i });
+    expect(link).toHaveAttribute('href', '/projects/cafemono');
   });
 
-  it('fourth card has a "View Project" link with href="#"', () => {
+  it('does not show Case Study links for work projects', () => {
     render(<Projects />);
-    const links = screen.getAllByRole('link', { name: /view kyaw kyar car showroom/i });
-    expect(links.length).toBeGreaterThan(0);
-    expect(links[0]).toHaveAttribute('href', '#');
+    workProjects.forEach((p) => {
+      expect(
+        screen.queryByRole('link', { name: new RegExp(`view ${p.title}`, 'i') })
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it('opens live demos in a new tab', () => {
+    render(<Projects />);
+    const demo = screen.getByRole('link', { name: /view demo for cafemono/i });
+    expect(demo).toHaveAttribute('href', 'https://cafemono.vercel.app/');
+    expect(demo).toHaveAttribute('target', '_blank');
   });
 });

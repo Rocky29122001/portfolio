@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
 import { motion as Motion } from "framer-motion";
-import { fadeUp } from "../animations";
+import SectionHeading from "./SectionHeading";
 import {
     FaPhp,
     FaLaravel,
@@ -14,82 +13,67 @@ import {
 } from "react-icons/fa";
 import { SiFlutter } from "react-icons/si";
 
+// brand colors brightened where the official hue would vanish on a dark bg
+const skills = [
+    { label: "PHP", Icon: FaPhp, color: "#8993be" },
+    { label: "Laravel", Icon: FaLaravel, color: "#ff4d3d" },
+    { label: "Python", Icon: FaPython, color: "#4b9fd6" },
+    { label: "Django", Icon: FaPython, color: "#44b78b" },
+    { label: "HTML", Icon: FaHtml5, color: "#e34f26" },
+    { label: "CSS", Icon: FaCss3Alt, color: "#2a8fd8" },
+    { label: "JavaScript", Icon: FaJs, color: "#f7df1e" },
+    { label: "React", Icon: FaReact, color: "#61dafb" },
+    { label: "Flutter", Icon: SiFlutter, color: "#54c5f8" },
+    { label: "jQuery", Icon: FaJs, color: "#3b9cd9" },
+    { label: "MySQL", Icon: FaDatabase, color: "#4479a1" },
+    { label: "SQL Server", Icon: FaDatabase, color: "#e0524a" },
+    { label: "SQLite", Icon: FaDatabase, color: "#58a6d6" },
+    { label: "Bootstrap", Icon: FaBootstrap, color: "#8f6fd8" },
+];
+
+const rowA = skills.slice(0, 7);
+const rowB = skills.slice(7);
+
+const StackRow = ({ items, reverse }) => {
+    // three copies so translateX(-33.333%) loops seamlessly on short rows
+    const loop = [...items, ...items, ...items];
+    return (
+        <Motion.div
+            className={`stack-row${reverse ? " reverse" : ""}`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+        >
+            <div className="stack-track">
+                {loop.map((item, idx) => (
+                    <div
+                        className="stack-card"
+                        key={`${item.label}-${idx}`}
+                        style={{ "--c": item.color }}
+                    >
+                        <span className="stack-orb">
+                            <item.Icon />
+                        </span>
+                        <span className="stack-label">{item.label}</span>
+                    </div>
+                ))}
+            </div>
+        </Motion.div>
+    );
+};
+
 const Skills = () => {
-    const trackRef = useRef(null);
-
-    // ponytail: direct style mutation in rAF, not React state — avoids a
-    // re-render every frame for a purely cosmetic, non-interactive effect.
-    useEffect(() => {
-        let rafId;
-        const tick = () => {
-            const track = trackRef.current;
-            if (track) {
-                const trackRect = track.getBoundingClientRect();
-                const centerX = trackRect.left + trackRect.width / 2;
-                for (const card of track.children) {
-                    const r = card.getBoundingClientRect();
-                    const cardCenter = r.left + r.width / 2;
-                    const dist = Math.abs(cardCenter - centerX);
-                    // falls off to 0 influence past ~320px from center
-                    const t = Math.max(0, 1 - dist / 320);
-                    const scale = 0.82 + t * 0.33; // 0.82 -> 1.15
-                    const opacity = 0.45 + t * 0.55; // 0.45 -> 1
-                    card.style.transform = `scale(${scale})`;
-                    card.style.opacity = opacity;
-                    card.style.zIndex = Math.round(t * 10);
-                }
-            }
-            rafId = requestAnimationFrame(tick);
-        };
-        rafId = requestAnimationFrame(tick);
-        return () => cancelAnimationFrame(rafId);
-    }, []);
-
-    const skills = [
-        { label: "PHP", Icon: FaPhp, color: "#777bb3" },
-        { label: "Laravel", Icon: FaLaravel, color: "#FF2D20" },
-        { label: "Python", Icon: FaPython, color: "#3776AB" },
-        { label: "Django", Icon: FaPython, color: "#092E20" },
-        { label: "HTML", Icon: FaHtml5, color: "#E34F26" },
-        { label: "CSS", Icon: FaCss3Alt, color: "#1572B6" },
-        { label: "JavaScript", Icon: FaJs, color: "#F7DF1E" },
-        { label: "React", Icon: FaReact, color: "#61DAFB" },
-        { label: "Flutter", Icon: SiFlutter, color: "#54C5F8" },
-        { label: "jQuery", Icon: FaJs, color: "#0769AD" },
-        { label: "MySQL", Icon: FaDatabase, color: "#00618A" },
-        { label: "SQL Server", Icon: FaDatabase, color: "#CC2927" },
-        { label: "SQLite", Icon: FaDatabase, color: "#003B57" },
-        { label: "Bootstrap", Icon: FaBootstrap, color: "#7952B3" },
-        { label: "React JS", Icon: FaReact, color: "#61DAFB" }
-    ];
-    const loop = [...skills, ...skills];
-
     return (
         <section className="section dark" id="skills">
-            <Motion.h2
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-            >
-                Technical Skills
-            </Motion.h2>
-
-            <div className="skills-marquee">
-                <div className="skills-track" ref={trackRef}>
-                    {loop.map((item, idx) => (
-                        <Motion.div
-                            key={`${item.label}-${idx}`}
-                            className="skill-card glass"
-                            whileHover={{
-                                boxShadow: "0 10px 30px -8px rgba(56, 189, 248, 0.5)",
-                            }}
-                        >
-                            <item.Icon className="skill-icon" style={{ color: item.color }} />
-                            <span>{item.label}</span>
-                        </Motion.div>
-                    ))}
-                </div>
+            <SectionHeading
+                eyebrow="Stack"
+                title="Technical skills & tools."
+                subtitle="The languages, frameworks, and databases I reach for to ship solid backends and polished frontends."
+            />
+            <div className="stack-marquee">
+                <StackRow items={rowA} />
+                <StackRow items={rowB} reverse />
             </div>
         </section>
     );

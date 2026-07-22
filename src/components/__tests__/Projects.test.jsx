@@ -48,12 +48,15 @@ describe('Projects component', () => {
     expect(link).toHaveAttribute('href', '/projects/cafemono');
   });
 
-  it('does not show Case Study links for work projects', () => {
+  it('only shows Case Study links for work projects that opt in with a link', () => {
     render(<Projects />);
     workProjects.forEach((p) => {
-      expect(
-        screen.queryByRole('link', { name: new RegExp(`view ${p.title}`, 'i') })
-      ).not.toBeInTheDocument();
+      const link = screen.queryByRole('link', { name: new RegExp(`view ${p.title}`, 'i') });
+      if (p.showDetail !== false && p.link) {
+        expect(link).toHaveAttribute('href', p.link);
+      } else {
+        expect(link).not.toBeInTheDocument();
+      }
     });
   });
 

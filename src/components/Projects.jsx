@@ -77,9 +77,15 @@ const ProjectRow = ({ p, index, group, showDetail, onNavigate }) => {
           </div>
         ) : null}
       </div>
-      <div className="project-row-visual" aria-hidden="true">
-        <span className="project-row-ghost">{num}</span>
-        <span className="project-row-monogram">{monogram(p.title)}</span>
+      <div className={`project-row-visual${p.image ? " has-image" : ""}`} aria-hidden="true">
+        {p.image ? (
+          <img className="project-row-image" src={p.image} alt="" loading="lazy" />
+        ) : (
+          <>
+            <span className="project-row-ghost">{num}</span>
+            <span className="project-row-monogram">{monogram(p.title)}</span>
+          </>
+        )}
       </div>
     </Motion.article>
   );
@@ -123,7 +129,7 @@ const Projects = ({ onNavigate }) => (
       title="Work"
       items={workProjects}
       group="Work"
-      showDetail={false}
+      showDetail
       onNavigate={onNavigate}
     />
     <ProjectGroup

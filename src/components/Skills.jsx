@@ -1,6 +1,8 @@
-import { motion as Motion } from "framer-motion";
+import { useState } from "react";
 import SectionHeading from "./SectionHeading";
 import {
+    FaPause,
+    FaPlay,
     FaPhp,
     FaLaravel,
     FaPython,
@@ -31,39 +33,22 @@ const skills = [
     { label: "Bootstrap", Icon: FaBootstrap, color: "#8f6fd8" },
 ];
 
-const rowA = skills.slice(0, 7);
-const rowB = skills.slice(7);
+// three copies so translateX(-33.333%) loops seamlessly
+const loop = [...skills, ...skills, ...skills];
 
-const StackRow = ({ items, reverse }) => {
-    // three copies so translateX(-33.333%) loops seamlessly on short rows
-    const loop = [...items, ...items, ...items];
-    return (
-        <Motion.div
-            className={`stack-row${reverse ? " reverse" : ""}`}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true, amount: 0.3 }}
-        >
-            <div className="stack-track">
-                {loop.map((item, idx) => (
-                    <div
-                        className="stack-card"
-                        key={`${item.label}-${idx}`}
-                        style={{ "--c": item.color }}
-                    >
-                        <span className="stack-orb">
-                            <item.Icon />
-                        </span>
-                        <span className="stack-label">{item.label}</span>
-                    </div>
-                ))}
-            </div>
-        </Motion.div>
-    );
+// relative luminance decides whether a tile needs dark or light ink for contrast
+const inkFor = (hex) => {
+    const n = parseInt(hex.slice(1), 16);
+    const r = (n >> 16) & 255;
+    const g = (n >> 8) & 255;
+    const b = n & 255;
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.62 ? "#0f172a" : "#f8fafc";
 };
 
 const Skills = () => {
+    const [paused, setPaused] = useState(false);
+
     return (
         <section className="section dark" id="skills">
             <SectionHeading
@@ -71,9 +56,30 @@ const Skills = () => {
                 title="Technical skills & tools."
                 subtitle="The languages, frameworks, and databases I reach for to ship solid backends and polished frontends."
             />
-            <div className="stack-marquee">
-                <StackRow items={rowA} />
-                <StackRow items={rowB} reverse />
+            <div className="skills-ticker-controls">
+                <button
+                    type="button"
+                    className="skills-ticker-toggle"
+                    onClick={() => setPaused((p) => !p)}
+                    aria-pressed={paused}
+                    aria-label={paused ? "Resume skills scroll" : "Pause skills scroll"}
+                >
+                    {paused ? <FaPlay aria-hidden="true" /> : <FaPause aria-hidden="true" />}
+                </button>
+            </div>
+            <div className={`skills-ticker${paused ? " is-paused" : ""}`}>
+                <div className="skills-ticker-track">
+                    {loop.map((item, idx) => (
+                        <div
+                            className="skill-tile"
+                            key={`${item.label}-${idx}`}
+                            style={{ "--c": item.color, "--ink": inkFor(item.color) }}
+                        >
+                            <item.Icon className="skill-tile-icon" aria-hidden="true" />
+                            <span className="skill-tile-label">{item.label}</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );

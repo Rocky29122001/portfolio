@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import Skills from '../Skills';
 
-// Mock framer-motion so Motion.div/h2 renders as plain elements
+// Mock framer-motion so SectionHeading's Motion.div/h2 render as plain elements
 vi.mock('framer-motion', () => ({
   motion: new Proxy({}, {
     get: (_target, prop) => {
@@ -32,6 +32,8 @@ vi.mock('react-icons/fa', () => ({
   FaBootstrap: () => <svg />,
   FaDatabase: () => <svg />,
   FaMobileAlt: () => <svg />,
+  FaPause: () => <svg />,
+  FaPlay: () => <svg />,
 }));
 
 // Mock react-icons/tb
@@ -40,16 +42,25 @@ vi.mock('react-icons/tb', () => ({
 }));
 
 describe('Skills component', () => {
-  it('renders a skill card with label "React JS"', () => {
+  it('renders a skill tile labeled "React"', () => {
     render(<Skills />);
-    const labels = screen.getAllByText('React JS');
+    const labels = screen.getAllByText('React');
     expect(labels.length).toBeGreaterThan(0);
   });
 
-  it('renders the React icon with color #61DAFB', () => {
+  it('renders the React icon', () => {
     render(<Skills />);
     const icons = screen.getAllByTestId('icon-react');
     expect(icons.length).toBeGreaterThan(0);
-    expect(icons[0]).toHaveStyle({ color: '#61DAFB' });
+  });
+
+  it('toggles the pause/resume control for the scrolling ticker', () => {
+    render(<Skills />);
+    const toggle = screen.getByRole('button', { name: /pause skills scroll/i });
+    expect(toggle).toHaveAttribute('aria-pressed', 'false');
+
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: /resume skills scroll/i })).toBeInTheDocument();
   });
 });

@@ -14,12 +14,14 @@ import BulletinBoardDetail from "./components/BulletinBoardDetail";
 import CaneHandicraftDetail from "./components/CaneHandicraftDetail";
 import BlackjackDetail from "./components/BlackjackDetail";
 import CafemonoDetail from "./components/CafemonoDetail";
+import KyawKyarCarshowroomDetail from "./components/KyawKyarCarshowroomDetail";
 
 const detailPages = {
   "/projects/cafemono": CafemonoDetail,
   "/projects/bulletin-board": BulletinBoardDetail,
   "/projects/cane-handicraft": CaneHandicraftDetail,
   "/projects/blackjack": BlackjackDetail,
+  "/projects/kyaw-kyar-carshowroom": KyawKyarCarshowroomDetail,
 };
 
 function App() {

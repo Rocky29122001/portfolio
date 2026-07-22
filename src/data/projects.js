@@ -1,6 +1,11 @@
+import kyawKyarHero from "../assets/projects/kyaw-kyar/customer-homepage.jpg";
+import cafemonoHero from "../assets/projects/cafemono/home.jpg";
+
 /**
  * Work = professional delivery. Academic = coursework / learning.
- * Work items omit detail links (no public case-study page).
+ * Work items omit detail links by default (no public case-study page),
+ * unless a project explicitly sets showDetail + link (e.g. Kyaw Kyar Carshowroom).
+ * `image`, when present, replaces the abstract monogram visual on the project card.
  */
 
 export const workProjects = [
@@ -8,7 +13,9 @@ export const workProjects = [
     title: "Kyaw Kyar Carshowroom",
     desc: "Frontend support with React.js: reusable components, clearer browsing flow, and responsive layout for the showroom experience.",
     tags: ["React.js", "JavaScript", "CSS"],
-    showDetail: false,
+    link: "/projects/kyaw-kyar-carshowroom",
+    showDetail: true,
+    image: kyawKyarHero,
   },
   {
     title: "Project Management System",
@@ -33,11 +40,12 @@ export const workProjects = [
 export const academicProjects = [
   {
     title: "Cafemono",
-    desc: "A beautifully crafted cafe website with elegant menu browsing, warm ambiance visuals, and a delightful ordering experience.",
-    tags: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    desc: "A beautifully crafted cafe ordering platform: elegant menu browsing, a concierge-style order flow, and a Laravel-backed admin dashboard.",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "Laravel API"],
     link: "/projects/cafemono",
     showDetail: true,
     demoUrl: "https://cafemono.vercel.app/",
+    image: cafemonoHero,
   },
   {
     title: "Myanmar Cane Handicraft Platform",

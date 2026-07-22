@@ -905,90 +905,122 @@ nav a:hover::after {
   text-transform: uppercase;
 }
 
-/* Skills marquee: two counter-scrolling rows of brand-colored pills */
-.stack-marquee {
+/* Skills: single continuous marquee of solid brand-color tiles.
+   Pauses on hover/focus and via the manual toggle, and stops entirely
+   under prefers-reduced-motion, so the motion never traps keyboard/AT users. */
+.skills-ticker-controls {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: flex-end;
+  max-width: 1150px;
+  margin: 0 auto 14px;
+}
+
+.skills-ticker-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.skills-ticker-toggle:hover,
+.skills-ticker-toggle:focus-visible {
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+  transform: translateY(-2px);
+}
+
+.skills-ticker {
   max-width: 1150px;
   margin: 0 auto;
-}
-
-.stack-row {
   overflow: hidden;
-  /* room for hover lift + glow so it isn't clipped by overflow:hidden */
-  padding: 12px 0;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  padding: 4px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
-.stack-track {
+.skills-ticker-track {
   display: flex;
   width: max-content;
+  gap: 16px;
   will-change: transform;
-  animation: stack-scroll 38s linear infinite;
+  animation: skills-scroll 40s linear infinite;
 }
 
-.stack-row.reverse .stack-track {
-  animation-direction: reverse;
-  animation-duration: 44s;
-}
-
-.stack-row:hover .stack-track {
+.skills-ticker.is-paused .skills-ticker-track,
+.skills-ticker:hover .skills-ticker-track,
+.skills-ticker:focus-within .skills-ticker-track {
   animation-play-state: paused;
 }
 
-/* track holds 3 copies; every card carries the same right margin,
-   so -33.333% is exactly one copy and the loop is seamless */
-@keyframes stack-scroll {
+@keyframes skills-scroll {
   to {
     transform: translateX(-33.3333%);
   }
 }
 
-.stack-card {
+.skill-tile {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-right: 18px;
-  padding: 12px 24px 12px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.16);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  gap: 11px;
+  flex-shrink: 0;
+  padding: 13px 24px 13px 16px;
+  border-radius: 14px;
+  background: var(--c);
+  color: var(--ink);
+  box-shadow:
+    0 14px 30px -14px color-mix(in srgb, var(--c) 70%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: default;
 }
 
-.stack-card:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--c) 65%, transparent);
-  box-shadow: 0 12px 30px -10px color-mix(in srgb, var(--c) 45%, transparent);
+.skill-tile:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 20px 42px -14px color-mix(in srgb, var(--c) 80%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.stack-orb {
-  width: 42px;
-  height: 42px;
+.skill-tile-icon {
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 1.25rem;
-  color: var(--c);
-  background: radial-gradient(circle at 30% 30%,
-      color-mix(in srgb, var(--c) 26%, transparent),
-      color-mix(in srgb, var(--c) 8%, transparent));
-  border: 1px solid color-mix(in srgb, var(--c) 35%, transparent);
-  box-shadow: 0 0 18px -4px color-mix(in srgb, var(--c) 50%, transparent);
+  font-size: 1.3rem;
+  color: var(--ink);
 }
 
-.stack-label {
+.skill-tile-label {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
-  color: var(--text);
+  color: var(--ink);
   white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-ticker-track {
+    animation: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .skill-tile {
+    padding: 10px 18px 10px 12px;
+    gap: 9px;
+  }
+
+  .skill-tile-icon {
+    font-size: 1.1rem;
+  }
+
+  .skill-tile-label {
+    font-size: 0.88rem;
+  }
 }
 /* Project card details */
 .project-tags {
@@ -1157,6 +1189,25 @@ nav a:hover::after {
   box-shadow:
     0 24px 60px -18px rgba(2, 6, 23, 0.8),
     0 0 44px -14px color-mix(in srgb, var(--row-accent) 55%, transparent);
+}
+
+/* real product screenshot standing in for the monogram, e.g. Kyaw Kyar's hero */
+.project-row-visual.has-image {
+  background: #0b1220;
+}
+
+.project-row-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.45s ease;
+}
+
+.project-row:hover .project-row-image {
+  transform: scale(1.045);
 }
 
 .project-row-monogram {
@@ -1596,7 +1647,7 @@ nav a:hover::after {
 }
 
 .detail-card p,
-.detail-summary > p {
+.detail-summary p:not(.detail-kicker) {
   color: #cbd5e1;
 }
 
@@ -1610,6 +1661,75 @@ nav a:hover::after {
 .screen-section-copy {
   margin-bottom: 20px;
   max-width: 760px;
+}
+
+/* Real product screenshots, one per section, framed like a browser window
+   so a raw screenshot reads as an intentional UI showcase, not a pasted image. */
+.shot-section {
+  display: block;
+}
+
+.shot-section .screen-section-copy {
+  margin-bottom: 24px;
+  max-width: 760px;
+}
+
+.shot-frame {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 12px;
+  background: #0b1220;
+  box-shadow: 0 24px 64px rgba(2, 6, 23, 0.38);
+}
+
+.shot-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.shot-dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.shot-dot-red {
+  background: #f87171;
+}
+
+.shot-dot-yellow {
+  background: #fbbf24;
+}
+
+.shot-dot-green {
+  background: #34d399;
+}
+
+.shot-frame-url {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-left: 12px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.1);
+  color: #94a3b8;
+  font-size: 0.74rem;
+  font-family: var(--font-display);
+}
+
+.shot-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0b1220;
 }
 
 .post-board-preview {
@@ -2125,7 +2245,7 @@ nav a:hover::after {
   padding-bottom: 104px;
 }
 
-.detail-summary > p {
+.detail-summary p:not(.detail-kicker) {
   font-size: 1.08rem;
 }
 
@@ -2922,6 +3042,15 @@ nav a:hover::after {
   .login-showcase-section .login-preview {
     width: min(430px, 100%);
     padding: 18px;
+  }
+
+  .shot-frame-bar {
+    padding: 10px 12px;
+  }
+
+  .shot-frame-url {
+    font-size: 0.68rem;
+    padding: 3px 10px;
   }
 
   .login-showcase-copy {

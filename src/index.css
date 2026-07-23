@@ -2263,6 +2263,54 @@ nav a:hover::after {
     linear-gradient(180deg, #020617 0%, #0f172a 48%, #030712 100%);
 }
 
+.pms-detail-page {
+  background:
+    radial-gradient(circle at 14% 8%, rgba(20, 184, 166, 0.14), transparent 30%),
+    radial-gradient(circle at 86% 10%, rgba(34, 197, 94, 0.13), transparent 30%),
+    linear-gradient(180deg, #020617 0%, #0f172a 48%, #030712 100%);
+}
+
+.mobile-shot-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.mobile-shot-section.flip {
+  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+}
+
+.mobile-shot-section.flip .phone-shot-preview {
+  order: 2;
+}
+
+.phone-shot-preview {
+  display: grid;
+  place-items: center;
+}
+
+.phone-shot-frame {
+  width: min(272px, 100%);
+  padding: 14px 10px 16px;
+  border: 8px solid #020617;
+  border-radius: 36px;
+  background: #0f172a;
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.42);
+}
+
+.phone-shot-screen {
+  overflow: hidden;
+  border-radius: 24px;
+  background: #ffffff;
+}
+
+.phone-shot-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .craft-showcase-section,
 .blackjack-showcase-section {
   display: grid;
@@ -3117,6 +3165,19 @@ nav a:hover::after {
 
   .blackjack-flow-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mobile-shot-section,
+  .mobile-shot-section.flip {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-shot-section.flip .phone-shot-preview {
+    order: 0;
+  }
+
+  .phone-shot-frame {
+    max-width: 260px;
   }
 
   .post-board-nav {

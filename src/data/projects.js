@@ -1,5 +1,6 @@
 import kyawKyarHero from "../assets/projects/kyaw-kyar/customer-homepage.jpg";
 import cafemonoHero from "../assets/projects/cafemono/home.jpg";
+import pmsHero from "../assets/projects/project-management/site-details.jpg";
 
 /**
  * Work = professional delivery. Academic = coursework / learning.
@@ -21,7 +22,9 @@ export const workProjects = [
     title: "Project Management System",
     desc: "Internal site management app: mobile client with Laravel API backend for roles, content, and operations.",
     tags: ["Laravel", "REST API", "Mobile"],
-    showDetail: false,
+    link: "/projects/project-management-system",
+    showDetail: true,
+    image: pmsHero,
   },
   {
     title: "Mini POS",

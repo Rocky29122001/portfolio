@@ -15,6 +15,7 @@ import CaneHandicraftDetail from "./components/CaneHandicraftDetail";
 import BlackjackDetail from "./components/BlackjackDetail";
 import CafemonoDetail from "./components/CafemonoDetail";
 import KyawKyarCarshowroomDetail from "./components/KyawKyarCarshowroomDetail";
+import ProjectManagementDetail from "./components/ProjectManagementDetail";
 
 const detailPages = {
   "/projects/cafemono": CafemonoDetail,
@@ -22,6 +23,7 @@ const detailPages = {
   "/projects/cane-handicraft": CaneHandicraftDetail,
   "/projects/blackjack": BlackjackDetail,
   "/projects/kyaw-kyar-carshowroom": KyawKyarCarshowroomDetail,
+  "/projects/project-management-system": ProjectManagementDetail,
 };
 
 function App() {

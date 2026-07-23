@@ -1,6 +1,6 @@
 import kyawKyarHero from "../assets/projects/kyaw-kyar/customer-homepage.jpg";
 import cafemonoHero from "../assets/projects/cafemono/home.jpg";
-import pmsHero from "../assets/projects/project-management/site-details.jpg";
+import pmsHero from "../assets/projects/project-management/login.jpg";
 
 /**
  * Work = professional delivery. Academic = coursework / learning.

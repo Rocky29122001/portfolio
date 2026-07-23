@@ -11,6 +11,7 @@ import {
   FaTrophy,
 } from "react-icons/fa";
 import { fadeUp } from "../animations";
+import gameShot from "../assets/projects/blackjack/game-screen.jpg";
 
 const gameFeatures = [
   {
@@ -86,37 +87,21 @@ const BlackjackDetail = ({ onNavigate }) => (
 
     <AnimatedSection className="detail-section blackjack-showcase-section">
       <div className="phone-game-preview" aria-label="Blackjack Flutter game preview">
-        <div className="phone-frame">
+        <div className="phone-shot-frame">
           <div className="phone-speaker" />
-          <div className="game-screen">
-            <div className="game-topbar">
-              <span>21 Game</span>
-              <strong>Coins 240</strong>
-            </div>
-            <div className="dealer-area">
-              <small>Dealer</small>
-              <div className="card-row">
-                <div className="playing-card red">K H</div>
-                <div className="playing-card hidden-card">?</div>
-              </div>
-              <strong>Total 10</strong>
-            </div>
-            <div className="round-status">Your turn</div>
-            <div className="player-area">
-              <small>Player</small>
-              <div className="card-row">
-                <div className="playing-card">A S</div>
-                <div className="playing-card red">9 D</div>
-              </div>
-              <strong>Total 20</strong>
-            </div>
-            <div className="game-actions">
-              <button type="button">Hit</button>
-              <button type="button">Stand</button>
-              <button type="button">Deal</button>
-            </div>
+          <div className="phone-shot-screen">
+            <img
+              src={gameShot}
+              alt="21 Game round in progress: player holds Ace and King for a blackjack, dealer shows one card face down"
+              loading="lazy"
+            />
           </div>
         </div>
+        <p className="detail-note">
+          Illustrative recreation — the original device screenshots were lost
+          with an older laptop, so this mock rebuilds the same layout using
+          generic card-game UI conventions.
+        </p>
       </div>
       <div className="login-showcase-copy">
         <p className="detail-kicker">Game loop</p>

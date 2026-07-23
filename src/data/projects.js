@@ -1,6 +1,7 @@
 import kyawKyarHero from "../assets/projects/kyaw-kyar/customer-homepage.jpg";
 import cafemonoHero from "../assets/projects/cafemono/home.jpg";
 import pmsHero from "../assets/projects/project-management/login.jpg";
+import blackjackHero from "../assets/projects/blackjack/game-screen.jpg";
 
 /**
  * Work = professional delivery. Academic = coursework / learning.
@@ -70,5 +71,6 @@ export const academicProjects = [
     tags: ["Laravel", "Flutter", "MySQL"],
     link: "/projects/blackjack",
     showDetail: true,
+    image: blackjackHero,
   },
 ];

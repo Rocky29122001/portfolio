@@ -2311,6 +2311,16 @@ nav a:hover::after {
   height: auto;
 }
 
+.detail-note {
+  margin-top: 14px;
+  max-width: 280px;
+  color: rgba(148, 163, 184, 0.75);
+  font-size: 0.82rem;
+  font-style: italic;
+  text-align: center;
+  line-height: 1.5;
+}
+
 .craft-showcase-section,
 .blackjack-showcase-section {
   display: grid;

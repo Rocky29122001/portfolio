@@ -2,6 +2,8 @@ import kyawKyarHero from "../assets/projects/kyaw-kyar/customer-homepage.jpg";
 import cafemonoHero from "../assets/projects/cafemono/home.jpg";
 import pmsHero from "../assets/projects/project-management/login.jpg";
 import blackjackHero from "../assets/projects/blackjack/game-screen.jpg";
+import caneHandicraftHero from "../assets/projects/cane-handicraft/storefront.jpg";
+import bulletinBoardHero from "../assets/projects/bulletin-board/post-board.jpg";
 
 /**
  * Work = professional delivery. Academic = coursework / learning.
@@ -57,6 +59,7 @@ export const academicProjects = [
     tags: ["Python", "Django", "Bootstrap", "JavaScript"],
     link: "/projects/cane-handicraft",
     showDetail: true,
+    image: caneHandicraftHero,
   },
   {
     title: "Bulletin Board System",
@@ -64,6 +67,7 @@ export const academicProjects = [
     tags: ["PHP", "Laravel", "MySQL", "jQuery", "CSS"],
     link: "/projects/bulletin-board",
     showDetail: true,
+    image: bulletinBoardHero,
   },
   {
     title: "21 Game Blackjack App",

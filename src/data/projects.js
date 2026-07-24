@@ -2,8 +2,9 @@ import kyawKyarHero from "../assets/projects/kyaw-kyar/customer-homepage.jpg";
 import cafemonoHero from "../assets/projects/cafemono/home.jpg";
 import pmsHero from "../assets/projects/project-management/login.jpg";
 import blackjackHero from "../assets/projects/blackjack/game-screen.jpg";
-import caneHandicraftHero from "../assets/projects/cane-handicraft/storefront.jpg";
+import caneHandicraftHero from "../assets/projects/cane-handicraft/marketplace-home.jpg";
 import bulletinBoardHero from "../assets/projects/bulletin-board/post-board.jpg";
+import restaurantProHero from "../assets/projects/restaurant-pro/homepage.jpg";
 
 /**
  * Work = professional delivery. Academic = coursework / learning.
@@ -37,9 +38,11 @@ export const workProjects = [
   },
   {
     title: "Restaurant Pro",
-    desc: "Restaurant web presence built with Laravel Blade: pages, menu, and server-rendered UI.",
+    desc: "Restaurant management system (R-Pro+) built with Laravel Blade: dine-in table map, category-first POS ordering, and back-office stock/supplier/reporting modules.",
     tags: ["Laravel", "Blade", "PHP", "MySQL"],
-    showDetail: false,
+    link: "/projects/restaurant-pro",
+    showDetail: true,
+    image: restaurantProHero,
   },
 ];
 
@@ -55,7 +58,7 @@ export const academicProjects = [
   },
   {
     title: "Myanmar Cane Handicraft Platform",
-    desc: "E-commerce platform for traditional Myanmar cane crafts: product catalog, cart, and admin dashboard.",
+    desc: "Multi-shop e-commerce marketplace for traditional Myanmar cane crafts: shop owner dashboards, PayPal checkout, and admin oversight.",
     tags: ["Python", "Django", "Bootstrap", "JavaScript"],
     link: "/projects/cane-handicraft",
     showDetail: true,

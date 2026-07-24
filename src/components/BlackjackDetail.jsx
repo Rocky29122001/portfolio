@@ -98,9 +98,9 @@ const BlackjackDetail = ({ onNavigate }) => (
           </div>
         </div>
         <p className="detail-note">
-          Illustrative recreation — the original device screenshots were lost
-          with an older laptop, so this mock rebuilds the same layout using
-          generic card-game UI conventions.
+          Recreated UI — the original device screenshots were lost when an
+          older laptop broke, so this rebuilds the same screen layout from
+          memory.
         </p>
       </div>
       <div className="login-showcase-copy">

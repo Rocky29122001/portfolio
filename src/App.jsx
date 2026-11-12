@@ -17,6 +17,8 @@ import CafemonoDetail from "./components/CafemonoDetail";
 import KyawKyarCarshowroomDetail from "./components/KyawKyarCarshowroomDetail";
 import ProjectManagementDetail from "./components/ProjectManagementDetail";
 import RestaurantProDetail from "./components/RestaurantProDetail";
+import AnimeFigureShopDetail from "./components/AnimeFigureShopDetail";
+import BusinessCard4UDetail from "./components/BusinessCard4UDetail";
 
 const detailPages = {
   "/projects/cafemono": CafemonoDetail,
@@ -26,6 +28,8 @@ const detailPages = {
   "/projects/kyaw-kyar-carshowroom": KyawKyarCarshowroomDetail,
   "/projects/project-management-system": ProjectManagementDetail,
   "/projects/restaurant-pro": RestaurantProDetail,
+  "/projects/anime-figure-shop": AnimeFigureShopDetail,
+  "/projects/business-card-4u": BusinessCard4UDetail,
 };
 
 function App() {

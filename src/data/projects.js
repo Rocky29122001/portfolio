@@ -5,12 +5,15 @@ import blackjackHero from "../assets/projects/blackjack/game-screen.jpg";
 import caneHandicraftHero from "../assets/projects/cane-handicraft/marketplace-home.jpg";
 import bulletinBoardHero from "../assets/projects/bulletin-board/post-board.jpg";
 import restaurantProHero from "../assets/projects/restaurant-pro/homepage.jpg";
+import animeShopHero from "../assets/projects/anime-figure-shop/shop-home.jpg";
+import businessCardHero from "../assets/projects/business-card-4u/saved-cards.jpg";
 
 /**
  * Work = professional delivery. Academic = coursework / learning.
  * Work items omit detail links by default (no public case-study page),
  * unless a project explicitly sets showDetail + link (e.g. Kyaw Kyar Carshowroom).
  * `image`, when present, replaces the abstract monogram visual on the project card.
+ * `status`, when present, shows an extra badge (e.g. "In progress") next to the group badge.
  */
 
 export const workProjects = [
@@ -43,6 +46,22 @@ export const workProjects = [
     link: "/projects/restaurant-pro",
     showDetail: true,
     image: restaurantProHero,
+  },
+  {
+    title: "Anime Figure Shop",
+    desc: "Web and mobile sales platform for local merchants: anime-figure product management, POS-style sales, and an admin dashboard.",
+    tags: ["React", "Laravel", "Flutter"],
+    link: "/projects/anime-figure-shop",
+    showDetail: true,
+    status: "In progress",
+    image: animeShopHero,
+  },
+  {
+    title: "School Management System",
+    desc: "Management system for private and international schools, with separate admin and parent apps for attendance, timetables, classes, and marks.",
+    tags: ["Laravel", "Flutter"],
+    showDetail: false,
+    status: "In progress",
   },
 ];
 
@@ -79,5 +98,19 @@ export const academicProjects = [
     link: "/projects/blackjack",
     showDetail: true,
     image: blackjackHero,
+  },
+  {
+    title: "Business Card 4U",
+    desc: "Business networking app for saving and finding business cards, connecting with partners, and adding other users as friends.",
+    tags: ["Flutter", "Laravel"],
+    link: "/projects/business-card-4u",
+    showDetail: true,
+    image: businessCardHero,
+  },
+  {
+    title: "My Daily Routine",
+    desc: "Personal routine and fitness tracker: save daily routines, record calorie intake, and keep a history of lifted weights.",
+    tags: ["Flutter", "Firebase"],
+    showDetail: false,
   },
 ];

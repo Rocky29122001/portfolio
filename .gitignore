@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 .vercel
 .env*
+
+# Agent working notes (personal); memory.md and wiki/ are committed
+.agent/HANDOFF.md
+.agent/hub/

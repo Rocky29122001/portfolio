@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import About from '../About';
+import { workProjects, academicProjects } from '../../data/projects';
 
-// Mock framer-motion so Motion.div/h2 renders as plain elements
+// Mock framer-motion so Motion.* renders as plain elements
 vi.mock('framer-motion', () => ({
   motion: new Proxy({}, {
     get: (_target, prop) => {
@@ -20,38 +21,48 @@ vi.mock('framer-motion', () => ({
   }),
 }));
 
-// Mock react-icons to avoid SVG rendering issues
-vi.mock('react-icons/fa', () => ({
-  FaCode: () => <svg data-testid="icon-code" />,
-  FaDatabase: () => <svg data-testid="icon-database" />,
-  FaServer: () => <svg data-testid="icon-server" />,
-  FaGraduationCap: () => <svg data-testid="icon-graduation" />,
-}));
+const pad = (n) => String(n).padStart(2, '0');
 
 describe('About component', () => {
-  it('renders "Myanmar Institute of Information Technology (MIIT)"', () => {
-    render(<About />);
-    expect(
-      screen.getByText('Myanmar Institute of Information Technology (MIIT)')
-    ).toBeInTheDocument();
-  });
-
-  it('renders "B.E (Hons) Electronics Engineering"', () => {
-    render(<About />);
-    expect(
-      screen.getByText('B.E (Hons) Electronics Engineering')
-    ).toBeInTheDocument();
-  });
-
-  it('does NOT render "B.E (Hons.) Electronics & Communication Engineering"', () => {
-    render(<About />);
-    expect(
-      screen.queryByText('B.E (Hons.) Electronics & Communication Engineering')
-    ).not.toBeInTheDocument();
-  });
-
-  it('renders .education-block element', () => {
+  it('renders the section with the about id', () => {
     const { container } = render(<About />);
-    expect(container.querySelector('.education-block')).not.toBeNull();
+    expect(container.querySelector('section#about')).not.toBeNull();
+  });
+
+  it('renders the headline statement', () => {
+    render(<About />);
+    expect(
+      screen.getByText('I turn complex backend problems into clean, scalable systems.')
+    ).toBeInTheDocument();
+  });
+
+  it('mentions the degree in the intro copy', () => {
+    render(<About />);
+    expect(
+      screen.getByText(/B\.E \(Hons\.\) in Electronics & Communication Engineering/)
+    ).toBeInTheDocument();
+  });
+
+  it('renders the profile photo with alt text', () => {
+    render(<About />);
+    expect(screen.getByAltText('Naing Khant')).toBeInTheDocument();
+  });
+
+  it('derives stats from project data', () => {
+    const { container } = render(<About />);
+    const all = [...workProjects, ...academicProjects];
+    const values = [...container.querySelectorAll('.about-stats dd')].map((dd) => dd.textContent);
+    expect(values).toEqual([
+      pad(all.length),
+      pad(all.filter((p) => p.showDetail && p.link).length),
+      pad(workProjects.length),
+    ]);
+  });
+
+  it('renders three numbered principles', () => {
+    const { container } = render(<About />);
+    const nums = [...container.querySelectorAll('.principle-num')].map((n) => n.textContent);
+    expect(nums).toEqual(['01', '02', '03']);
+    expect(screen.getByText('Clean code')).toBeInTheDocument();
   });
 });

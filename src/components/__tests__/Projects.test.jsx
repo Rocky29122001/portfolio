@@ -13,7 +13,7 @@ vi.mock('framer-motion', () => ({
           whileInView, whileHover, whileTap, viewport,
           ...domProps
         } = rest;
-        const Tag = prop === 'h2' ? 'h2' : prop === 'article' ? 'article' : 'div';
+        const Tag = prop;
         return <Tag {...domProps}>{children}</Tag>;
       };
       Component.displayName = `motion.${prop}`;
@@ -43,15 +43,15 @@ describe('Projects component', () => {
   });
 
   it('shows a Case Study link for academic projects with a detail page', () => {
-    render(<Projects />);
-    const link = screen.getByRole('link', { name: /view cafemono/i });
+    render(<Projects onNavigate={() => {}} />);
+    const link = screen.getByRole('link', { name: /cafemono case study/i });
     expect(link).toHaveAttribute('href', '/projects/cafemono');
   });
 
   it('only shows Case Study links for work projects that opt in with a link', () => {
     render(<Projects />);
     workProjects.forEach((p) => {
-      const link = screen.queryByRole('link', { name: new RegExp(`view ${p.title}`, 'i') });
+      const link = screen.queryByRole('link', { name: new RegExp(`${p.title} case study`, 'i') });
       if (p.showDetail !== false && p.link) {
         expect(link).toHaveAttribute('href', p.link);
       } else {
@@ -62,7 +62,7 @@ describe('Projects component', () => {
 
   it('opens live demos in a new tab', () => {
     render(<Projects />);
-    const demo = screen.getByRole('link', { name: /view demo for cafemono/i });
+    const demo = screen.getByRole('link', { name: /live demo of cafemono/i });
     expect(demo).toHaveAttribute('href', 'https://cafemono.vercel.app/');
     expect(demo).toHaveAttribute('target', '_blank');
   });

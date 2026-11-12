@@ -1,79 +1,72 @@
-import { useRef } from "react";
-import {
-    motion as Motion,
-    useReducedMotion,
-    useScroll,
-    useTransform,
-} from "framer-motion";
-import { fadeUp } from "../animations";
-import Typing from "./Typing";
-import FloatingIcons from "./FloatingIcons";
-import profile from "../assets/myprofile.png";
+import { motion as Motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
+import GradientASCII from "./reactbits/GradientASCII";
 
-const Hero = () => {
-    const heroRef = useRef(null);
-    const reduceMotion = useReducedMotion();
+// greys only, so the ASCII field reads as texture behind the type rather than color
+const ASCII_COLORS = ["#09090b", "#27272a", "#71717a", "#d4d4d8"];
 
-    // parallax out: as the hero scrolls off, image and text drift at
-    // different speeds and fade, giving depth without extra scroll length.
-    // Entrance animations live on inner wrappers because motion values in
-    // style would override animate/variants on the same element.
-    const { scrollYProgress } = useScroll({
-        target: heroRef,
-        offset: ["start start", "end start"],
-    });
-    const imageY = useTransform(scrollYProgress, [0, 1], [0, 140]);
-    const imageScale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
-    const contentY = useTransform(scrollYProgress, [0, 1], [0, 260]);
-    const fadeOut = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+const rise = (delay) => ({
+    initial: { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] },
+});
 
-    return (
-        <section className="hero" id="home" ref={heroRef}>
-            <FloatingIcons />
-            <Motion.div
-                className="hero-image"
-                style={reduceMotion ? undefined : { y: imageY, scale: imageScale, opacity: fadeOut }}
-            >
-                <Motion.div
-                    initial={{ scale: 0.7, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <img src={profile} alt="Naing Khant" />
-                </Motion.div>
+const Hero = () => (
+    <section className="hero" id="home">
+        <GradientASCII
+            className="hero-ascii"
+            colors={ASCII_COLORS}
+            shape="horizon"
+            cellSize={14}
+            density={0.7}
+            glyphOpacity={0.6}
+            glow={0.1}
+            gradientOpacity={0.55}
+            grain={0.05}
+            flicker={0.1}
+            speed={0.6}
+            clickEffect="none"
+            fontFamily='"Geist Mono", ui-monospace, monospace'
+        />
+        <div className="hero-fade" aria-hidden="true" />
+
+        <div className="hero-inner">
+            <Motion.p className="hero-eyebrow" {...rise(0.2)}>
+                <span className="status-dot" aria-hidden="true" />
+                Available for work · Mandalay, Myanmar
+            </Motion.p>
+
+            <Motion.h1 className="hero-title" {...rise(0.3)}>
+                Naing Khant
+            </Motion.h1>
+
+            <Motion.p className="hero-lead" {...rise(0.45)}>
+                Backend-focused software developer building scalable, secure
+                systems with Laravel, and the web and mobile apps on top of them.
+            </Motion.p>
+
+            <Motion.div className="hero-cta" {...rise(0.6)}>
+                <a href="#work" className="btn">
+                    View work <FaArrowRight aria-hidden="true" />
+                </a>
+                <a href="#contact" className="btn btn-ghost">
+                    Get in touch
+                </a>
             </Motion.div>
+        </div>
 
-            <Motion.div
-                className="hero-content"
-                style={reduceMotion ? undefined : { y: contentY, opacity: fadeOut }}
-            >
-                <Motion.div variants={fadeUp} initial="hidden" animate="show">
-                    <div className="hero-badge">
-                        <span className="pulse-dot" />
-                        Open to opportunities
-                    </div>
-
-                    <h1 className="glow">
-                        Hello, I'm <span>Naing Khant</span>
-                    </h1>
-
-                    <h3>
-                        I am a <Typing />
-                    </h3>
-
-                    <p>
-                        Backend-focused software developer passionate about
-                        scalable, secure, and real-world systems.
-                    </p>
-
-                    <div className="hero-cta">
-                        <a href="#contact" className="btn">Hire Me</a>
-                        <a href="#projects" className="btn btn-ghost">View Projects</a>
-                    </div>
-                </Motion.div>
-            </Motion.div>
-        </section>
-    );
-};
+        <Motion.a
+            href="#work"
+            className="hero-scroll"
+            aria-label="Scroll to selected work"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+        >
+            <span>Scroll</span>
+            <span className="hero-scroll-line" aria-hidden="true" />
+        </Motion.a>
+    </section>
+);
 
 export default Hero;

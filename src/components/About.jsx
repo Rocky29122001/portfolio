@@ -1,144 +1,88 @@
-import { useEffect, useRef, useState } from "react";
-import { motion as Motion, useInView } from "framer-motion";
-import { FaCode, FaDatabase, FaServer } from "react-icons/fa";
-import SectionHeading from "./SectionHeading";
+import { motion as Motion } from "framer-motion";
+import profile from "../assets/myprofile.png";
+import { workProjects, academicProjects } from "../data/projects";
 
-// count-up that starts when the stat scrolls into view
-const Counter = ({ value, suffix = "" }) => {
-    const ref = useRef(null);
-    const inView = useInView(ref, { once: true, margin: "-40px" });
-    const [n, setN] = useState(0);
-
-    useEffect(() => {
-        if (!inView) return;
-        let rafId;
-        const t0 = performance.now();
-        const duration = 1400;
-        const tick = (now) => {
-            const t = Math.min(1, (now - t0) / duration);
-            const eased = 1 - Math.pow(1 - t, 3);
-            setN(Math.round(eased * value));
-            if (t < 1) rafId = requestAnimationFrame(tick);
-        };
-        rafId = requestAnimationFrame(tick);
-        return () => cancelAnimationFrame(rafId);
-    }, [inView, value]);
-
-    return (
-        <span ref={ref}>
-            {n}
-            {suffix}
-        </span>
-    );
-};
-
-const highlights = [
-    {
-        Icon: FaCode,
-        title: "Clean Code",
-        text: "Maintainable, readable, and efficient code as a baseline — not an afterthought.",
-    },
-    {
-        Icon: FaDatabase,
-        title: "Database Design",
-        text: "Schemas and queries tuned for high-performance, data-heavy applications.",
-    },
-    {
-        Icon: FaServer,
-        title: "Scalable Systems",
-        text: "Backends built to absorb growth, traffic spikes, and real-world load.",
-    },
-];
+const allProjects = [...workProjects, ...academicProjects];
 
 const stats = [
-    { value: 8, suffix: "+", label: "Projects Built" },
-    { value: 15, suffix: "+", label: "Technologies" },
-    { value: 4, suffix: "", label: "Case Studies" },
+    { value: allProjects.length, label: "Projects" },
+    { value: allProjects.filter((p) => p.showDetail && p.link).length, label: "Case studies" },
+    { value: workProjects.length, label: "Work projects" },
 ];
 
-// cursor-tracking spotlight: feeds --mx/--my to the card's ::after glow
-const trackSpot = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+const principles = [
+    {
+        title: "Clean code",
+        text: "Maintainable, readable code as a baseline, not an afterthought.",
+    },
+    {
+        title: "Data first",
+        text: "Schemas and queries designed for the load they will actually see.",
+    },
+    {
+        title: "Built to grow",
+        text: "Backends that absorb new features and traffic without a rewrite.",
+    },
+];
+
+const reveal = {
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
 };
 
-const About = () => {
-    return (
-        <section className="section" id="about">
-            <SectionHeading
-                eyebrow="About"
-                title="Building reliable systems with care."
-                subtitle="Backend developer focused on clean architecture, performance, and real-world impact."
-            />
-            <div className="about-grid">
-                <Motion.div
-                    className="about-statement"
-                    onMouseMove={trackSpot}
-                    initial={{ opacity: 0, y: 32 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <p className="about-big">
-                        I turn <span className="grad">complex backend problems</span>{" "}
-                        into clean, <span className="grad">scalable systems</span>.
-                    </p>
-                    <p>
-                        I'm a <strong>Backend Developer</strong> with a B.E (Hons.) in
-                        Electronics &amp; Communication Engineering, specializing in
-                        secure, maintainable systems with{" "}
-                        <strong>PHP, Laravel, and modern SQL</strong>.
-                    </p>
-                    <p>
-                        My approach pairs deep technical curiosity with practical
-                        delivery — solving hard problems, optimizing performance, and
-                        building tools teams actually love to use.
-                    </p>
-                    <div className="about-stats">
-                        {stats.map((s) => (
-                            <div className="about-stat" key={s.label}>
-                                <span className="about-stat-num">
-                                    <Counter value={s.value} suffix={s.suffix} />
-                                </span>
-                                <span className="about-stat-label">{s.label}</span>
-                            </div>
-                        ))}
-                    </div>
-                </Motion.div>
+const About = () => (
+    <section className="section" id="about">
+        <div className="section-intro">
+            <p className="section-label">04 — About</p>
+        </div>
 
-                <div className="about-cards">
-                    {highlights.map((item, i) => (
-                        <Motion.div
-                            className="hl-card"
-                            key={item.title}
-                            onMouseMove={trackSpot}
-                            initial={{ opacity: 0, x: 40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            whileHover={{ y: -4 }}
-                            transition={{
-                                duration: 0.55,
-                                delay: 0.12 * i,
-                                ease: [0.22, 1, 0.36, 1],
-                            }}
-                            viewport={{ once: true, amount: 0.4 }}
-                        >
-                            <span className="hl-index">
-                                {String(i + 1).padStart(2, "0")}
-                            </span>
-                            <span className="hl-orb">
-                                <item.Icon />
-                            </span>
-                            <div className="hl-body">
-                                <h3>{item.title}</h3>
-                                <p>{item.text}</p>
-                            </div>
-                        </Motion.div>
+        <div className="about-layout">
+            <Motion.figure className="about-photo" {...reveal}>
+                <img src={profile} alt="Naing Khant" loading="lazy" />
+            </Motion.figure>
+
+            <Motion.div className="about-copy" {...reveal}>
+                <p className="about-statement">
+                    I turn complex backend problems into clean, scalable systems.
+                </p>
+                <p>
+                    I'm a backend developer with a B.E (Hons.) in Electronics &amp;
+                    Communication Engineering, specializing in secure, maintainable
+                    systems with PHP, Laravel, and modern SQL.
+                </p>
+                <p>
+                    I pair technical curiosity with practical delivery: solving hard
+                    problems, tuning performance, and building tools teams actually
+                    like to use.
+                </p>
+
+                <dl className="about-stats">
+                    {stats.map((s) => (
+                        <div key={s.label}>
+                            <dt>{s.label}</dt>
+                            <dd>{String(s.value).padStart(2, "0")}</dd>
+                        </div>
                     ))}
-                </div>
-            </div>
-        </section>
-    );
-};
+                </dl>
+            </Motion.div>
+        </div>
+
+        <ul className="principles">
+            {principles.map((item, i) => (
+                <Motion.li
+                    key={item.title}
+                    {...reveal}
+                    transition={{ ...reveal.transition, delay: 0.08 * i }}
+                >
+                    <span className="principle-num">{String(i + 1).padStart(2, "0")}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                </Motion.li>
+            ))}
+        </ul>
+    </section>
+);
 
 export default About;

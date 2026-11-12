@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaInstagram } from "react
 import Navbar from "./components/Navbar";
 import Preloader from "./components/Preloader";
 import Hero from "./components/Hero";
+import WorkCarousel from "./components/WorkCarousel";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
@@ -134,9 +135,10 @@ function App() {
             <>
               <Navbar />
               <Hero />
-              <About />
-              <Skills />
+              <WorkCarousel onNavigate={navigate} />
               <Projects onNavigate={navigate} />
+              <Skills />
+              <About />
               <Contact />
             </>
           )}

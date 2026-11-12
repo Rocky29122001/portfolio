@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import Hero from '../Hero';
 
-// Mock framer-motion so Motion.div renders as a plain div
+// Mock framer-motion so Motion.<tag> renders as that plain tag
 vi.mock('framer-motion', () => ({
   motion: new Proxy({}, {
     get: (_target, prop) => {
@@ -13,7 +13,8 @@ vi.mock('framer-motion', () => ({
           whileInView, whileHover, whileTap, viewport,
           ...domProps
         } = rest;
-        return <div {...domProps}>{children}</div>;
+        const Tag = prop;
+        return <Tag {...domProps}>{children}</Tag>;
       };
       Component.displayName = `motion.${prop}`;
       return Component;
@@ -21,18 +22,10 @@ vi.mock('framer-motion', () => ({
   }),
 }));
 
-// Mock Typing component
-vi.mock('../Typing', () => ({
-  default: () => <span data-testid="typing-mock">Developer</span>,
+// The ASCII background needs WebGL2, which jsdom does not provide
+vi.mock('../reactbits/GradientASCII', () => ({
+  default: () => <div data-testid="gradient-ascii-mock" />,
 }));
-
-// Mock FloatingIcons component
-vi.mock('../FloatingIcons', () => ({
-  default: () => <div data-testid="floating-icons-mock" />,
-}));
-
-// Mock profile image import
-vi.mock('../../assets/myprofile.png', () => ({ default: 'myprofile.png' }));
 
 describe('Hero component', () => {
   it('renders h1 containing "Naing Khant"', () => {
@@ -43,8 +36,14 @@ describe('Hero component', () => {
 
   it('renders CTA link with href="#contact"', () => {
     render(<Hero />);
-    const cta = screen.getByRole('link', { name: /hire me/i });
+    const cta = screen.getByRole('link', { name: /get in touch/i });
     expect(cta).toHaveAttribute('href', '#contact');
+  });
+
+  it('renders a CTA to the selected work section', () => {
+    render(<Hero />);
+    const cta = screen.getByRole('link', { name: /view work/i });
+    expect(cta).toHaveAttribute('href', '#work');
   });
 
   it('renders bio <p> element', () => {

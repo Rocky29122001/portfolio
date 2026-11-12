@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion as Motion, useReducedMotion } from "framer-motion";
+import { NK_PIECES } from "./nkPieces";
 
 const BELTS = 8;
 const TAG_WORDS = ["BUILD", "SCALE", "SECURE"];
@@ -29,15 +30,6 @@ const SlotDigit = ({ value }) => (
   </span>
 );
 
-// the NK mark from public/nav-icon.svg rebuilt inline so its three pieces can
-// assemble one by one (outline draws, then the fill glows in); the wrap
-// breathes in 3D meanwhile
-const NK_PIECES = [
-  "M61 184V74l76 76c16 16 20 25 20 42-10 6-22 9-34 8v-55l-42-42v81H61Z",
-  "M126 75h25v50l-12 13-13-13V75Z",
-  "M146 139l47-53h43l-66 69 66 70h-43l-47-52 23-25 13 14 27-30h-18l-23 25-22-18Z",
-];
-
 const LogoMark = () => (
   <Motion.div
     className="pre-logo-3d"
@@ -48,19 +40,19 @@ const LogoMark = () => (
     <svg viewBox="0 0 256 256" className="pre-logo" fill="none" aria-hidden="true">
       <defs>
         <linearGradient id="pre-mark-fill" x1="48" y1="60" x2="206" y2="202" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#22f1ff" />
-          <stop offset="0.52" stopColor="#0ea5e9" />
-          <stop offset="1" stopColor="#0b4fd6" />
+          <stop stopColor="#fafafa" />
+          <stop offset="0.52" stopColor="#d4d4d8" />
+          <stop offset="1" stopColor="#a1a1aa" />
         </linearGradient>
         <linearGradient id="pre-mark-edge" x1="54" y1="70" x2="210" y2="192" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#a9ffff" />
-          <stop offset="0.5" stopColor="#13dfff" />
-          <stop offset="1" stopColor="#1478ff" />
+          <stop stopColor="#ffffff" />
+          <stop offset="0.5" stopColor="#d4d4d8" />
+          <stop offset="1" stopColor="#71717a" />
         </linearGradient>
         <radialGradient id="pre-mark-bg" cx="50%" cy="48%" r="70%">
-          <stop stopColor="#07162e" />
-          <stop offset="0.7" stopColor="#020617" />
-          <stop offset="1" stopColor="#000814" />
+          <stop stopColor="#18181b" />
+          <stop offset="0.7" stopColor="#0c0c0e" />
+          <stop offset="1" stopColor="#09090b" />
         </radialGradient>
       </defs>
 

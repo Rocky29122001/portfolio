@@ -1,89 +1,76 @@
 import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import NkMark from "./NkMark";
+
+const links = [
+    { id: "work", label: "Work" },
+    { id: "projects", label: "Projects" },
+    { id: "skills", label: "Stack" },
+    { id: "about", label: "About" },
+    { id: "contact", label: "Contact" },
+];
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-    const [active, setActive] = useState("home");
-    const navIcon = "/nav-icon.svg";
+    const [active, setActive] = useState("");
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        const ids = ["home", "about", "skills", "projects", "contact"];
-        const sections = ids
-            .map(id => document.getElementById(id))
+        const sections = links
+            .map(({ id }) => document.getElementById(id))
             .filter(Boolean);
 
+        // a section counts as current once it crosses the upper third of the viewport
         const observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
-                        setActive(entry.target.id);
-                    }
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) setActive(entry.target.id);
                 });
             },
-            { rootMargin: "0px 0px -40% 0px", threshold: [0.6, 0.8, 1] }
+            { rootMargin: "-35% 0px -60% 0px" }
         );
+        sections.forEach((s) => observer.observe(s));
 
-        sections.forEach(s => observer.observe(s));
-        return () => observer.disconnect();
+        const onScroll = () => setScrolled(window.scrollY > 24);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("scroll", onScroll);
+        };
     }, []);
 
     return (
-        <header>
-            <a href="#home" className="logo logo-with-mark" onClick={() => setOpen(false)} aria-label="Naing Khant home">
-                <img
-                    src={navIcon}
-                    width="40"
-                    height="40"
-                    alt=""
-                    onError={(event) => {
-                        event.currentTarget.onerror = null;
-                        event.currentTarget.src = "/logo.svg";
-                    }}
-                />
-                <span>naingkhant<i className="logo-dot">.</i></span>
+        <header className={`site-nav${scrolled ? " is-scrolled" : ""}`}>
+            <a href="#home" className="nav-mark" onClick={() => setOpen(false)} aria-label="Naing Khant home">
+                <NkMark size={24} />
+                <span>Naing Khant</span>
             </a>
 
-            <nav className={open ? "active" : ""} role="navigation" aria-label="Primary">
-                <a
-                    href="#home"
-                    className={active === "home" ? "active" : ""}
-                    onClick={() => setOpen(false)}
-                >
-                    Home
-                </a>
-                <a
-                    href="#about"
-                    className={active === "about" ? "active" : ""}
-                    onClick={() => setOpen(false)}
-                >
-                    About
-                </a>
-                <a
-                    href="#skills"
-                    className={active === "skills" ? "active" : ""}
-                    onClick={() => setOpen(false)}
-                >
-                    Skills
-                </a>
-                <a
-                    href="#projects"
-                    className={active === "projects" ? "active" : ""}
-                    onClick={() => setOpen(false)}
-                >
-                    Projects
-                </a>
-                <a
-                    href="#contact"
-                    className={active === "contact" ? "active" : ""}
-                    onClick={() => setOpen(false)}
-                >
-                    Contact
-                </a>
+            <nav className={`nav-links${open ? " is-open" : ""}`} aria-label="Primary">
+                {links.map(({ id, label }) => (
+                    <a
+                        key={id}
+                        href={`#${id}`}
+                        className={active === id ? "is-active" : ""}
+                        aria-current={active === id ? "true" : undefined}
+                        onClick={() => setOpen(false)}
+                    >
+                        {label}
+                    </a>
+                ))}
             </nav>
 
-            <div className="menu-btn" onClick={() => setOpen(!open)}>
+            <button
+                type="button"
+                className="nav-toggle"
+                onClick={() => setOpen((o) => !o)}
+                aria-expanded={open}
+                aria-label={open ? "Close menu" : "Open menu"}
+            >
                 {open ? <FaTimes /> : <FaBars />}
-            </div>
+            </button>
         </header>
     );
 };

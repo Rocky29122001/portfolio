@@ -8,34 +8,36 @@ import { resolve } from 'path';
 /**
  * Validates: Requirements 1.1
  *
- * Parse the raw pixel value of `.hero-content h1` font-size from the CSS source
- * and assert it is >= 52px on desktop.
+ * Parse the minimum font-size of `.hero-title` from the CSS source and assert
+ * it is >= 52px. The size is a clamp(), so its lower bound is the smallest it
+ * can ever render; rem values are converted at the 16px browser default.
  *
  * jsdom does not compute media queries, so we read the CSS file directly and
  * extract the font-size from the desktop rule (outside any media query).
  */
 
 function parseHeroH1FontSize(cssContent) {
-  // Find the `.hero-content h1` block that is NOT inside a @media query.
+  // Find the `.hero-title` block that is NOT inside a @media query.
   // Strategy: strip all @media blocks first, then find the rule.
   const withoutMedia = cssContent.replace(/@media[^{]*\{(?:[^{}]*|\{[^{}]*\})*\}/g, '');
 
-  const ruleMatch = withoutMedia.match(/\.hero-content\s+h1\s*\{([^}]*)\}/);
+  const ruleMatch = withoutMedia.match(/\.hero-title\s*\{([^}]*)\}/);
   if (!ruleMatch) return null;
 
   const declarations = ruleMatch[1];
-  const fontSizeMatch = declarations.match(/font-size\s*:\s*(\d+(?:\.\d+)?)px/);
+  const fontSizeMatch = declarations.match(/font-size\s*:\s*(?:clamp\(\s*)?(\d+(?:\.\d+)?)(px|rem)/);
   if (!fontSizeMatch) return null;
 
-  return parseFloat(fontSizeMatch[1]);
+  const value = parseFloat(fontSizeMatch[1]);
+  return fontSizeMatch[2] === 'rem' ? value * 16 : value;
 }
 
 describe('Property 1: Hero h1 font-size >= 52px on desktop', () => {
-  const cssPath = resolve(process.cwd(), 'src/index.css');
+  const cssPath = resolve(process.cwd(), 'src/theme.css');
   const cssContent = readFileSync(cssPath, 'utf-8');
   const fontSize = parseHeroH1FontSize(cssContent);
 
-  it('should parse a valid font-size from .hero-content h1', () => {
+  it('should parse a valid font-size from .hero-title', () => {
     expect(fontSize).not.toBeNull();
     expect(typeof fontSize).toBe('number');
   });

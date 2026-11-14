@@ -1,10 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-  <defs>
-    <linearGradient id="nk" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#38bdf8"/>
-      <stop offset="1" stop-color="#0ea5e9"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="#0f172a" stroke="url(#nk)" stroke-width="2"/>
-  <text x="32" y="42" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="800" fill="url(#nk)">NK</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 292" aria-hidden="true">
+  <rect width="292" height="292" rx="56" fill="#09090b"/>
+  <g transform="translate(-368 -309)" stroke-width="9" stroke-linejoin="round">
+    <path d="M574 484 582 485 639 424 628 424Z" fill="#c9a55c" stroke="#c9a55c"/>
+    <g fill="#ededef" stroke="#ededef">
+      <path d="M385 424 392 430V562H385Z"/>
+      <path d="M400 419H492L641 562H629L489 427H407Z"/>
+      <path d="M495 446 502 453V562H495Z"/>
+      <path d="M531 347H538V562H531Z"/>
+      <path d="M572 476 577 483 643 413Z"/>
+    </g>
+  </g>
 </svg>

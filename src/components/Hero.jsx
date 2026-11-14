@@ -1,6 +1,7 @@
 import { motion as Motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import GradientASCII from "./reactbits/GradientASCII";
+import profile from "../assets/myprofile.png";
 
 // greys only, so the ASCII field reads as texture behind the type rather than color
 const ASCII_COLORS = ["#09090b", "#27272a", "#71717a", "#d4d4d8"];
@@ -31,28 +32,39 @@ const Hero = () => (
         <div className="hero-fade" aria-hidden="true" />
 
         <div className="hero-inner">
-            <Motion.p className="hero-eyebrow" {...rise(0.2)}>
-                <span className="status-dot" aria-hidden="true" />
-                Available for work · Mandalay, Myanmar
-            </Motion.p>
+            <div className="hero-copy">
+                <Motion.p className="hero-eyebrow" {...rise(0.2)}>
+                    <span className="status-dot" aria-hidden="true" />
+                    Available for work · Mandalay, Myanmar
+                </Motion.p>
 
-            <Motion.h1 className="hero-title" {...rise(0.3)}>
-                Naing Khant
-            </Motion.h1>
+                <Motion.h1 className="hero-title" {...rise(0.3)}>
+                    Naing Khant
+                </Motion.h1>
 
-            <Motion.p className="hero-lead" {...rise(0.45)}>
-                Backend-focused software developer building scalable, secure
-                systems with Laravel, and the web and mobile apps on top of them.
-            </Motion.p>
+                <Motion.p className="hero-lead" {...rise(0.45)}>
+                    Backend-focused software developer building scalable, secure
+                    systems with Laravel, and the web and mobile apps on top of them.
+                </Motion.p>
 
-            <Motion.div className="hero-cta" {...rise(0.6)}>
-                <a href="#work" className="btn">
-                    View work <FaArrowRight aria-hidden="true" />
-                </a>
-                <a href="#contact" className="btn btn-ghost">
-                    Get in touch
-                </a>
-            </Motion.div>
+                <Motion.div className="hero-cta" {...rise(0.6)}>
+                    <a href="#work" className="btn">
+                        View work <FaArrowRight aria-hidden="true" />
+                    </a>
+                    <a href="#contact" className="btn btn-ghost">
+                        Get in touch
+                    </a>
+                </Motion.div>
+            </div>
+
+            <Motion.figure
+                className="hero-photo"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+                <img src={profile} alt="Naing Khant" width="640" height="800" fetchPriority="high" />
+            </Motion.figure>
         </div>
 
         <Motion.a

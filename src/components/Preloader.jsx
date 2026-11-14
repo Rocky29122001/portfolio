@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion as Motion, useReducedMotion } from "framer-motion";
-import { NK_PIECES } from "./nkPieces";
+import brand from "../assets/nkbrand.png";
 
 const BELTS = 8;
-const TAG_WORDS = ["BUILD", "SCALE", "SECURE"];
 const LOAD_MS = 2400; // counter runtime before the reveal starts
 
 const CornerPlus = ({ pos }) => (
@@ -30,56 +29,16 @@ const SlotDigit = ({ value }) => (
   </span>
 );
 
+// the brand PNG is dark-on-white; CSS inverts it for the dark ground and crops
+// the square down to the mark and its wordmark
 const LogoMark = () => (
   <Motion.div
-    className="pre-logo-3d"
-    initial={{ rotateY: -32, rotateX: 12 }}
-    animate={{ rotateY: [-32, 14, -8, 0], rotateX: [12, -6, 3, 0] }}
-    transition={{ duration: LOAD_MS / 1000, ease: "easeInOut" }}
+    className="pre-logo"
+    initial={{ opacity: 0, filter: "blur(8px)" }}
+    animate={{ opacity: 1, filter: "blur(0px)" }}
+    transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
   >
-    <svg viewBox="0 0 256 256" className="pre-logo" fill="none" aria-hidden="true">
-      <defs>
-        <linearGradient id="pre-mark-fill" x1="48" y1="60" x2="206" y2="202" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#fafafa" />
-          <stop offset="0.52" stopColor="#d4d4d8" />
-          <stop offset="1" stopColor="#a1a1aa" />
-        </linearGradient>
-        <linearGradient id="pre-mark-edge" x1="54" y1="70" x2="210" y2="192" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#ffffff" />
-          <stop offset="0.5" stopColor="#d4d4d8" />
-          <stop offset="1" stopColor="#71717a" />
-        </linearGradient>
-        <radialGradient id="pre-mark-bg" cx="50%" cy="48%" r="70%">
-          <stop stopColor="#18181b" />
-          <stop offset="0.7" stopColor="#0c0c0e" />
-          <stop offset="1" stopColor="#09090b" />
-        </radialGradient>
-      </defs>
-
-      <Motion.rect
-        width="256" height="256" rx="22" fill="url(#pre-mark-bg)"
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        style={{ transformOrigin: "128px 128px" }}
-      />
-      {NK_PIECES.map((d, i) => (
-        <Motion.path
-          key={d}
-          d={d}
-          fill="url(#pre-mark-fill)"
-          stroke="url(#pre-mark-edge)"
-          strokeWidth="4"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, fillOpacity: 0 }}
-          animate={{ pathLength: 1, fillOpacity: 1 }}
-          transition={{
-            pathLength: { duration: 0.9, delay: 0.4 + i * 0.35, ease: [0.65, 0, 0.35, 1] },
-            fillOpacity: { duration: 0.5, delay: 0.9 + i * 0.35 },
-          }}
-        />
-      ))}
-    </svg>
+    <img src={brand} alt="" draggable="false" />
   </Motion.div>
 );
 
@@ -132,21 +91,6 @@ const Preloader = ({ onFinish }) => {
           <CornerPlus pos="bl" />
           <CornerPlus pos="br" />
           <LogoMark />
-        </div>
-
-        <div className="pre-tagline">
-          {TAG_WORDS.map((word, i) => (
-            <Motion.span
-              key={word}
-              className="pre-tag-word"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 + i * 0.35, duration: 0.45 }}
-            >
-              {word}
-              {i < TAG_WORDS.length - 1 && <i className="pre-tag-dot">·</i>}
-            </Motion.span>
-          ))}
         </div>
 
         <div className="pre-counter">

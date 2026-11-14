@@ -46,6 +46,11 @@ describe('Hero component', () => {
     expect(cta).toHaveAttribute('href', '#work');
   });
 
+  it('renders the profile photo with alt text', () => {
+    render(<Hero />);
+    expect(screen.getByAltText('Naing Khant')).toBeInTheDocument();
+  });
+
   it('renders bio <p> element', () => {
     render(<Hero />);
     const bio = screen.getByText(/backend-focused software developer/i);

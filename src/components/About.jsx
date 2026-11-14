@@ -1,5 +1,4 @@
 import { motion as Motion } from "framer-motion";
-import profile from "../assets/myprofile.png";
 import { workProjects, academicProjects } from "../data/projects";
 
 const allProjects = [...workProjects, ...academicProjects];
@@ -39,10 +38,6 @@ const About = () => (
         </div>
 
         <div className="about-layout">
-            <Motion.figure className="about-photo" {...reveal}>
-                <img src={profile} alt="Naing Khant" loading="lazy" />
-            </Motion.figure>
-
             <Motion.div className="about-copy" {...reveal}>
                 <p className="about-statement">
                     I turn complex backend problems into clean, scalable systems.

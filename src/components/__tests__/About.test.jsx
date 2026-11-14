@@ -43,11 +43,6 @@ describe('About component', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders the profile photo with alt text', () => {
-    render(<About />);
-    expect(screen.getByAltText('Naing Khant')).toBeInTheDocument();
-  });
-
   it('derives stats from project data', () => {
     const { container } = render(<About />);
     const all = [...workProjects, ...academicProjects];

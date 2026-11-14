@@ -44,7 +44,7 @@ const Navbar = () => {
     return (
         <header className={`site-nav${scrolled ? " is-scrolled" : ""}`}>
             <a href="#home" className="nav-mark" onClick={() => setOpen(false)} aria-label="Naing Khant home">
-                <NkMark size={24} />
+                <NkMark size={30} />
                 <span>Naing Khant</span>
             </a>
 

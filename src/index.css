@@ -51,7 +51,7 @@ body {
   position: absolute;
   left: 0;
   width: 100%;
-  background: #070d1a; /* flat so adjacent belts read as one seamless ground */
+  background: #09090b; /* flat so adjacent belts read as one seamless ground */
   transform-origin: 50% 100%;
 }
 
@@ -68,11 +68,7 @@ body {
   position: relative;
   width: min(240px, 56vw);
   aspect-ratio: 1;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 700px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .pre-plus {
@@ -94,43 +90,30 @@ body {
 .pre-plus.bl { bottom: -18px; left: -18px; }
 .pre-plus.br { bottom: -18px; right: -18px; }
 
-.pre-logo-3d {
-  width: 58%;
-  aspect-ratio: 1;
-  transform-style: preserve-3d;
-}
-
+/* crop window over the 1024px brand square: shows a 460px region centred on
+   the mark and wordmark (source centre 512, 510) */
 .pre-logo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 26px rgba(56, 189, 248, 0.28));
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  mix-blend-mode: screen; /* drops the inverted near-black backing into the ground */
 }
 
-.pre-tagline {
-  display: flex;
-  align-items: baseline;
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.pre-tag-word {
-  display: inline-flex;
-  align-items: baseline;
-}
-
-.pre-tag-dot {
-  font-style: normal;
-  margin: 0 0.7em;
-  color: var(--primary);
+.pre-logo img {
+  position: absolute;
+  left: -61.3%;
+  top: -60.9%;
+  width: 222.6%;
+  max-width: none;
+  height: auto;
+  /* white lines on black; the hue turn brings the inverted accent back to gold */
+  filter: invert(1) hue-rotate(180deg);
+  user-select: none;
 }
 
 .pre-counter {
   position: absolute;
-  top: calc(100% + 52px);
+  top: calc(100% + 40px);
   display: flex;
   align-items: baseline;
   font-family: var(--font-display);

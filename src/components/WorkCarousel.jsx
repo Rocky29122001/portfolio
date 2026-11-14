@@ -24,21 +24,28 @@ const WorkCarousel = ({ onNavigate }) => {
                 <p className="section-label">01 — Selected work</p>
                 <h2 className="section-title">Things I've built.</h2>
                 <p className="section-sub">
-                    Drag or use the arrow keys to browse. Click the centered
-                    project to open its case study.
+                    The reel advances on its own. Drag or use the arrow keys
+                    to browse, and click the centered project to open its
+                    case study.
                 </p>
             </div>
 
             <div className="work-reel">
                 <FlexCarousel
                     items={featured}
-                    preset="liquid"
-                    intro="rise"
+                    // flat reel: no lens bend, tilt or colour fringing, and a plain fade in
+                    preset="ribbon"
+                    intro="fade"
+                    bend={0}
+                    dispersion={0}
+                    squeeze={0}
                     cardHeight={0.56}
-                    gap={18}
-                    radius={14}
+                    gap={24}
+                    radius={6}
                     fit="landscape"
                     captions
+                    autoplay
+                    interval={4}
                     captureWheel={false}
                     focusOnClick={false}
                     onChange={(index) => setActive(index)}
